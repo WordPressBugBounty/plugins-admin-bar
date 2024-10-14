@@ -53,7 +53,7 @@ if (!class_exists('Core')) {
             if(!empty($current_user->data->display_name)){
                 $user_name = $current_user->data->display_name;
             } else {
-                $user_name = $current_user->data->user_nicename;
+                $user_name = !empty($current_user->data->user_nicename) ? $current_user->data->user_nicename : '';
             }
 
             $disable_status = false;
@@ -471,14 +471,25 @@ if (!class_exists('Core')) {
             $user  = wp_get_current_user();
             $roles = $user->roles;
 
+
+
             foreach ($parsed_menu as $menu_id => $menu) {
+
+                // if existing title_default then title_default
+                // if not existing saved_title_default then saved_title_default
+                $howdy_title = '';
+                if( !empty($this->admin_bar_options['saved_admin_bar']['my-account']['title'] ) ){
+                    $howdy_title = $this->admin_bar_options['saved_admin_bar']['my-account']['title'];
+                } elseif( !empty($this->admin_bar_options['existing_admin_bar']['my-account']['title_default'] ) ){
+                    $howdy_title = $this->admin_bar_options['existing_admin_bar']['my-account']['title_default'];
+                }
 
                 if( $menu_id === 'my-account'){
                     $current_user  = wp_get_current_user();
                     $user_id       = get_current_user_id();
                     $avatar        = get_avatar($user_id, 26);                        // size 26x26 pixels
                     $display_name  = $current_user->display_name;
-                    $menu['title'] = $menu['title'] . ', '. $display_name . $avatar;
+                    $menu['title'] = $howdy_title . ', ' . $display_name . $avatar;
                 }
 
                 $args = array();

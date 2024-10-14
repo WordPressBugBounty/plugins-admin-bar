@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'jeweltheme/admin-bar',
-        'pretty_version' => '1.0.2.8',
-        'version' => '1.0.2.8',
-        'reference' => '3a84bc35b95c33b70e4c7d26eaac4bd505c4e22b',
+        'pretty_version' => '1.0.2.9',
+        'version' => '1.0.2.9',
+        'reference' => 'a61525bc44f4729f759fd8aafb9d1f163e0edbe8',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'jeweltheme/admin-bar' => array(
-            'pretty_version' => '1.0.2.8',
-            'version' => '1.0.2.8',
-            'reference' => '3a84bc35b95c33b70e4c7d26eaac4bd505c4e22b',
+            'pretty_version' => '1.0.2.9',
+            'version' => '1.0.2.9',
+            'reference' => 'a61525bc44f4729f759fd8aafb9d1f163e0edbe8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

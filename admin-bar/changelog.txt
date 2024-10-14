@@ -1,4 +1,12 @@
 == Changelog ==
+= 1.0.2.9 (14-10-2024) =
+* Updated: "Howdy" Text Change option not working issue fixed
+* Fixed: Hidden For Admin Bar Item Compatibility with WP Adminify
+* Fixed: Option Page not showing Compatibility with WP Adminify
+
+= 1.0.2.8 (7-9-2024) =
+* Updated: UI Improvements
+
 = 1.0.2.7 (31-08-2024) =
 * Fixed: CSS issue fix
 * Fixed: Pre-loader image issue

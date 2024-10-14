@@ -44,7 +44,7 @@ if ( ! class_exists( 'Assets' ) ) {
 
 			$screen = get_current_screen();
 
-			if ( 'toplevel_page_jlt_admin_bar_editor-settings' === $screen->id || 'wp-adminify_page_jlt_admin_bar_editor-settings' === $screen->id) {
+			if ( 'toplevel_page_jlt_admin_bar_editor-settings' === $screen->id || 'wp-adminify_page_jlt_admin_bar_editor-settings' === $screen->id || 'wp-adminify-pro_page_jlt_admin_bar_editor-settings' === $screen->id) {
 
 				// Fonts CSS
 				wp_register_style('jlt-admin-bar-simple-line-icons', JLT_ADMIN_BAR_EDITOR_ASSETS . 'fonts/simple-line-icons/css/simple-line-icons.css', false, JLT_ADMIN_BAR_EDITOR_VER);
