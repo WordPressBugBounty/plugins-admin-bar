@@ -1,4 +1,7 @@
 == Changelog ==
+= 1.0.3.0 (31-10-2024) =
+* Fixed: Free vs Pro License and Activation issue fixed
+
 = 1.0.2.9 (14-10-2024) =
 * Updated: "Howdy" Text Change option not working issue fixed
 * Fixed: Hidden For Admin Bar Item Compatibility with WP Adminify

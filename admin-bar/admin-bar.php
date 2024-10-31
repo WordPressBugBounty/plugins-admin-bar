@@ -4,7 +4,7 @@
  * Plugin Name: Admin Bar Editor
  * Plugin URI:  https://jeweltheme.com
  * Description: This plugin turns on or off Admin Bar in front end, for all users and customize backend admin bar.
- * Version:     1.0.2.9
+ * Version:     1.0.3.0
  * Author:      Jewel Theme
  * Author URI:  https://jeweltheme.com/admin-bar-editor
  * Text Domain: admin-bar
@@ -90,18 +90,18 @@ if ( ! defined( 'JLT_ADMIN_BAR_EDITOR_IMAGES' ) ) {
 	define( 'JLT_ADMIN_BAR_EDITOR_IMAGES', JLT_ADMIN_BAR_EDITOR_ASSETS . 'images/' );
 }
 
+// Deactivate the Pro Version if exists.
+function admin_bar_deactivate_pro_version() {
+	if ( is_plugin_active('admin-bar-pro/admin-bar-pro.php') ) {
+		deactivate_plugins('admin-bar-pro/admin-bar-pro.php');
+	}
+}
+register_activation_hook(__FILE__, 'admin_bar_deactivate_pro_version');
+
+
 if ( ! class_exists( '\\JewelTheme\AdminBarEditor\\AdminBarEditor' ) ) {
 	// Autoload Files.
 	include_once JLT_ADMIN_BAR_EDITOR_DIR . '/vendor/autoload.php';
 	// Instantiate AdminBarEditor Class.
 	include_once JLT_ADMIN_BAR_EDITOR_DIR . '/class-admin-bar.php';
 }
-
-// Activation and Deactivation hooks.
-if ( class_exists( '\\JewelTheme\AdminBarEditor\\AdminBarEditor' ) ) {
-	register_activation_hook( JLT_ADMIN_BAR_EDITOR_FILE, array( '\\JewelTheme\AdminBarEditor\\AdminBarEditor', 'jlt_admin_bar_editor_activation_hook' ) );
-	// register_deactivation_hook( JLT_ADMIN_BAR_EDITOR_FILE, array( '\\JewelTheme\AdminBarEditor\\AdminBarEditor', 'jlt_admin_bar_editor_deactivation_hook' ) );
-}
-
-// Maybe Load the Plugin
-include_once JLT_ADMIN_BAR_EDITOR_DIR . '/loader.php';

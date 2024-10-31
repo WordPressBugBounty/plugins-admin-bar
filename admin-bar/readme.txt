@@ -4,7 +4,7 @@ Donate link: https://www.buymeacoffee.com/jeweltheme
 Tags: admin bar, toolbar, Hide Admin Toolbar, hide toolbar by user roles, custom links in admin bar
 Requires at least: 4.0
 Tested up to: 6.6.2
-Stable tag: 1.0.2.9
+Stable tag: 1.0.3.0
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html

@@ -234,20 +234,6 @@ if ( ! class_exists( '\JewelTheme\AdminBarEditor\AdminBarEditor' ) ) {
 		}
 
 		/**
-		* Deactivate Pro Plugin if it's not already active
-		*
-		* @author Jewel Theme <support@jeweltheme.com>
-		*/
-		public static function jlt_admin_bar_editor_activation_hook() {
-				$plugin = 'admin-bar-pro/admin-bar.php';
-
-			if ( is_plugin_active( $plugin ) ) {
-				deactivate_plugins( $plugin );
-			}
-		}
-
-
-		/**
 		 * Returns the singleton instance of the class.
 		 */
 		public static function get_instance() {

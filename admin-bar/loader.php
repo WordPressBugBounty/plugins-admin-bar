@@ -29,12 +29,12 @@ class Loader {
         /**
          * Hook: Load This Plugin
          */
-        add_action( 'jltwp_adminify_plugin_loaded', [ $this, 'jlt_admin_bar_editor_plugin_loaded' ] );
+        add_action('jlt_admin_bar_editor_plugin_loaded', [ $this, 'jlt_admin_bar_editor_plugin_loaded' ] );
 
 
 
         /**
-         * Freemius Hooks
+         * License Hooks
          */
         // if ( jlt_admin_bar_editor_fs_is_parent_active_and_loaded() ) {
         //     // If parent already included, init add-on.
