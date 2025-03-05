@@ -54,3 +54,31 @@ if ( ! function_exists( 'jlt_admin_bar_editor_exclude_pages_except' ) ) {
 		return jlt_admin_bar_editor_option( 'jlt_admin_bar_editor_triggers', 'exclude_pages_except', array() );
 	}
 }
+
+// Check if Premium
+if (! function_exists('jlt_admin_bar_editor_is_premium')) {
+	/**
+	 * Check if the plugin is premium
+	 *
+	 * @return bool
+	 */
+	function jlt_admin_bar_editor_is_premium()
+	{
+		return (class_exists('\\JewelTheme\\AdminBarEditor\\Pro\\AdminBarEditorPro') && ! empty(\JewelTheme\AdminBarEditor\Pro\AdminBarEditorPro::is_premium()));
+	}
+}
+
+// Check if Plan
+if (! function_exists('jlt_admin_bar_editor_is_plan')) {
+	/**
+	 * Check if the plugin is plan
+	 *
+	 * @param string $plan
+	 *
+	 * @return bool
+	 */
+	function jlt_admin_bar_editor_is_plan($plan = 'starter')
+	{
+		return (class_exists('\\JewelTheme\\AdminBarEditor\\Pro\\AdminBarEditorPro') && ! empty(\JewelTheme\AdminBarEditor\Pro\AdminBarEditorPro::is_plan($plan)));
+	}
+}

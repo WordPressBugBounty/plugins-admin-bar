@@ -1,4 +1,19 @@
 == Changelog ==
+= 1.0.4.0 (05-03-2025) =
+* Updated: Frontend style not working issue updated
+* Updated: Attachment image for icons updated
+* Updated: Admin settings panel updated
+* Updated: Toaster position change to top-right corner
+* Updated: Loading image updated
+* Updated: Screenshot & Banner image updated
+* Fixed: Custom icons uploader "Select Files" color issue fixed
+* Fixed: Menu item image height fixed
+* Fixed: User info showing wrong name 
+* Fixed: Admin bar editor is not synced once new item added or deleted.
+
+= 1.0.3.1 (22-12-2024) =
+* Update: Query optimization and security measures
+
 = 1.0.3.0 (31-10-2024) =
 * Fixed: Free vs Pro License and Activation issue fixed
 

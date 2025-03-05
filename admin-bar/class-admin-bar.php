@@ -39,16 +39,16 @@ if ( ! class_exists( '\JewelTheme\AdminBarEditor\AdminBarEditor' ) ) {
 		private static $instance = null;
 
 		/**
-		 * what we collect construct method
+		 * construct method
 		 *
 		 * @author Jewel Theme <support@jeweltheme.com>
 		 */
 		public function __construct() {
-			$this->includes();
-			add_action( 'plugins_loaded', array( $this, 'jlt_admin_bar_editor_plugins_loaded' ), 999 );
+			add_action( 'plugins_loaded', array( $this, 'jlt_admin_bar_editor_plugins_loaded' ));
 
 			// Body Class.
 			add_filter( 'admin_body_class', array( $this, 'jlt_admin_bar_editor_body_class' ) );
+			add_filter( 'body_class', array( $this, 'jlt_admin_bar_editor_body_class' ) );
 
 			// This should run earlier .
 			// add_action( 'plugins_loaded', [ $this, 'jlt_admin_bar_editor_maybe_run_upgrades' ], -100 ); .
@@ -120,7 +120,13 @@ if ( ! class_exists( '\JewelTheme\AdminBarEditor\AdminBarEditor' ) ) {
 		 * @author Jewel Theme <support@jeweltheme.com>
 		 */
 		public function jlt_admin_bar_editor_plugins_loaded() {
-			$this->jlt_admin_bar_editor_activate();
+			new Assets();
+			new Recommended_Plugins();
+			new Pro_Upgrade();
+			new Notifications();
+			new Featured();
+			new Feedback();
+			new Core();
 		}
 
 		/**
@@ -171,7 +177,11 @@ if ( ! class_exists( '\JewelTheme\AdminBarEditor\AdminBarEditor' ) ) {
 		 */
 		public function jlt_admin_bar_editor_body_class( $classes ) {
 			// $classes .= ' jlt-admin-bar_editor '; // TODO: Need to change all classes
-			$classes .= ' jlt-admin-bar ';
+			if( is_array($classes)){
+				array_push($classes, 'jlt-admin-bar' );
+			} else {
+				$classes .= ' jlt-admin-bar ';
+			}
 			return $classes;
 		}
 
@@ -194,21 +204,6 @@ if ( ! class_exists( '\JewelTheme\AdminBarEditor\AdminBarEditor' ) ) {
 			}
 		}
 
-		/**
-		 * Include methods
-		 *
-		 * @author Jewel Theme <support@jeweltheme.com>
-		 */
-		public function includes() {
-			new Assets();
-			new Recommended_Plugins();
-			new Pro_Upgrade();
-			new Notifications();
-			new Featured();
-			new Feedback();
-			new Core();
-		}
-
 
 		/**
 		 * Initialization
@@ -226,11 +221,13 @@ if ( ! class_exists( '\JewelTheme\AdminBarEditor\AdminBarEditor' ) ) {
 		 * @author Jewel Theme <support@jeweltheme.com>
 		 */
 		public function jlt_admin_bar_editor_load_textdomain() {
-			$domain = 'admin-bar';
-			$locale = apply_filters( 'jlt_admin_bar_editor_plugin_locale', get_locale(), $domain );
+			add_action('init', function () {
+				$domain = 'admin-bar';
+				$locale = apply_filters('jlt_admin_bar_editor_plugin_locale', get_locale(), $domain);
 
-			load_textdomain( $domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo' );
-			load_plugin_textdomain( $domain, false, dirname( JLT_ADMIN_BAR_EDITOR_BASE ) . '/languages/' );
+				load_textdomain($domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo');
+				load_plugin_textdomain( $domain, false, dirname( JLT_ADMIN_BAR_EDITOR_BASE ) . '/languages/' );
+			});
 		}
 
 		/**

@@ -147,32 +147,7 @@ if (!class_exists('Core')) {
             if( !empty($disable_frontend_all_users) ) {
                 show_admin_bar( false );
             } else {
-                if (!empty($disable_frontend_admin_bar) && !empty($disable_conditions)) {
-                    foreach ($disable_conditions as $disabled_for) {
-                        if (empty($disabled_for)) continue;
-
-                        $disabled_types = $disabled_for['condition'];
-                        $disabled_value = $disabled_for['conditionValue'];
-
-                        if ($disabled_types == 'user_role' && (is_array($disabled_value) && array_intersect($disabled_value, $user_roles ))){
-                            add_filter('show_admin_bar', '__return_false');
-                        }
-
-                        if ($disabled_types == 'user_name' && in_array($user->user_login, $disabled_value)){
-                            add_filter('show_admin_bar', '__return_false');
-                        }
-
-                        // $jltadminbar_user_capabilities = 0;
-                        // if( is_array($user_capabilities) ) {
-                        //     foreach( $user_capabilities as $caps ){
-                        //         if( current_user_can( $caps ) ) {
-                        //             $jltadminbar_user_capabilities = 1;
-                        //             break;
-                        //         }
-                        //     }
-                        // }
-                    }
-                }
+                
             }
 
             if( !empty($disable_frontend_guest_users) && !is_user_logged_in() ) {
@@ -204,7 +179,20 @@ if (!class_exists('Core')) {
         public function get_admin_bar_menu_list()
         {
             global $wp_admin_bar;
-
+            $syned = false;
+            if( is_admin()){
+                $previous_admin_bar = get_option('previous_admin_bar_backend');
+                update_option('previous_admin_bar_backend', $wp_admin_bar);
+            }else{
+                $previous_admin_bar = get_option('previous_admin_bar_frontend');
+                update_option('previous_admin_bar_frontend', $wp_admin_bar);
+            }
+            if($previous_admin_bar  === $wp_admin_bar){
+                $syned = true;
+                update_option($this->prefix . '_is_synced', true);
+            }else{
+                update_option($this->prefix . '_is_synced', false);
+            }
             // if (is_admin()) {
             //     $wp_admin_bar->remove_menu('menu-toggle');
             //     $wp_admin_bar->remove_menu('wp-logo');
@@ -214,8 +202,8 @@ if (!class_exists('Core')) {
             //     $wp_admin_bar->remove_menu('my-account');
             // }
 
-            $frontend_items = $this->get_frontend_items();
-            if ($frontend_items === false) return;
+            // $frontend_items = $this->get_frontend_items();
+            // if ($frontend_items === false) return;
 
             $admin_bar_items                           = (new AdminBarEditorOptions())->get();
 
@@ -227,12 +215,15 @@ if (!class_exists('Core')) {
                 $existing_admin_bar                        = self::format_to_nested($admin_bars['existing_admin_bar']);
                 $existing_admin_bar                        = self::clean_array($existing_admin_bar);
                 $admin_bars['existing_admin_bar']          = self::assoc_to_flat_array($existing_admin_bar);
-
-                $admin_bars['admin_bar_settings']       = !empty( $admin_bar_items['admin_bar_settings'] ) ? $admin_bar_items['admin_bar_settings'] : [];
             }
 
-            $admin_bars['existing_admin_bar_frontend'] = $this->nodes_to_array($frontend_items, 'frontend');
+            // $admin_bars['existing_admin_bar_frontend'] = $this->nodes_to_array($frontend_items, 'frontend');
+            $admin_bars['existing_admin_bar_frontend'] = $this->nodes_to_array($wp_admin_bar->get_nodes(), 'frontend');
             $admin_bars['user_roles']                  = $user_roles;
+            
+            // Admin Bar Styles
+            $admin_bars['admin_bar_settings']       = !empty( $admin_bar_items['admin_bar_settings'] ) ? $admin_bar_items['admin_bar_settings'] : [];
+
 
             // Add disable adminbar keys
             $admin_bars['disable_backend_admin_bar'] = isset($admin_bar_items['disable_backend_admin_bar']) ? $admin_bar_items['disable_backend_admin_bar'] : 0;
@@ -470,26 +461,46 @@ if (!class_exists('Core')) {
 
             $user  = wp_get_current_user();
             $roles = $user->roles;
-
-
+            if( in_array('my-account', array_keys($parsed_menu))){
+                $account_items = $parsed_menu['my-account'];
+                unset($parsed_menu['my-account']);
+                $parsed_menu['my-account'] = $account_items;
+            }
 
             foreach ($parsed_menu as $menu_id => $menu) {
-
+                
+                
                 // if existing title_default then title_default
                 // if not existing saved_title_default then saved_title_default
                 $howdy_title = '';
-                if( !empty($this->admin_bar_options['saved_admin_bar']['my-account']['title'] ) ){
-                    $howdy_title = $this->admin_bar_options['saved_admin_bar']['my-account']['title'];
-                } elseif( !empty($this->admin_bar_options['existing_admin_bar']['my-account']['title_default'] ) ){
-                    $howdy_title = $this->admin_bar_options['existing_admin_bar']['my-account']['title_default'];
+                if( is_admin()){
+                    if( !empty($this->admin_bar_options['saved_admin_bar']['my-account']['title'] ) ){
+                        $howdy_title = $this->admin_bar_options['saved_admin_bar']['my-account']['title'];
+                    } elseif( !empty($this->admin_bar_options['existing_admin_bar']['my-account']['title_default'] ) ){
+                        $howdy_title = $this->admin_bar_options['existing_admin_bar']['my-account']['title_default'];
+                    }
+                }else{
+                    if( !empty($this->admin_bar_options['saved_admin_bar_frontend']['my-account']['title'] ) ){
+                        $howdy_title = $this->admin_bar_options['saved_admin_bar_frontend']['my-account']['title'];
+                    } elseif( !empty($this->admin_bar_options['existing_admin_bar_frontend']['my-account']['title_default'] ) ){
+                        $howdy_title = $this->admin_bar_options['existing_admin_bar_frontend']['my-account']['title_default'];
+                    }
                 }
-
+                
                 if( $menu_id === 'my-account'){
+                    $current_user  = wp_get_current_user();
+                    $user_id       = get_current_user_id();
+                    $avatar        = get_avatar($user_id, 26);     // size 26x26 pixels
+                    $display_name  = $current_user->display_name;
+                    $menu['title'] = $howdy_title . ', ' . $display_name . $avatar; 
+                }
+                if($menu_id === 'user-info') {
                     $current_user  = wp_get_current_user();
                     $user_id       = get_current_user_id();
                     $avatar        = get_avatar($user_id, 26);                        // size 26x26 pixels
                     $display_name  = $current_user->display_name;
-                    $menu['title'] = $howdy_title . ', ' . $display_name . $avatar;
+                    $menu['title_default'] = $avatar . $display_name . '<span class="display-name edit-profile">Edit Profile</span>';
+                    $menu['title_encoded_default'] = htmlspecialchars($menu['title_default'], ENT_QUOTES, 'UTF-8');
                 }
 
                 $args = array();

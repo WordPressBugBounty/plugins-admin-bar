@@ -1,4 +1,4 @@
-# Copyright (C) 2024 admin-bar
+# Copyright (C) 2025 admin-bar
 # This file is distributed under the same license as the admin-bar package.
 msgid ""
 msgstr ""
@@ -6,13 +6,29 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-10-31 05:46+0000\n"
+"POT-Creation-Date: 2025-03-05 09:50+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../class-admin-bar-pro.php:117
+msgid "<b>Admin Bar Editor Pro</b> requires <strong>Admin Bar Editor</strong> plugin to be active. Please activate Admin Bar Editor to continue."
+msgstr ""
+
+#: ../class-admin-bar-pro.php:118
+msgid "Activate Admin Bar Editor"
+msgstr ""
+
+#: ../class-admin-bar-pro.php:109
+msgid "<b>Admin Bar Editor Pro</b> requires %1$s\"Admin Bar Editor\"%2$s plugin to be installed and activated. Please install Admin Bar Editor to continue."
+msgstr ""
+
+#: ../class-admin-bar-pro.php:110
+msgid "Install Admin Bar Editor"
+msgstr ""
 
 #: ../class-admin-bar.php:72, ../class-admin-bar.php:103
 msgid "Adminbar Editor Settings"
@@ -22,7 +38,7 @@ msgstr ""
 msgid "Adminbar Editor"
 msgstr ""
 
-#: ../class-admin-bar.php:104, ../Libs/License/Loader.php:614, ../Libs/License/Loader.php:612
+#: ../class-admin-bar.php:104, ../Pro/License/Loader.php:615, ../Pro/License/Loader.php:613
 msgid "Settings"
 msgstr ""
 
@@ -31,7 +47,7 @@ msgid "Current Blog ID"
 msgstr ""
 
 #: ../Inc/Utils.php:452
-msgid "%s <a href=\"https://jeweltheme.com/admin-bar-editor#pricing\" target=\"_blank\">Upgrade to Pro Now!</a>"
+msgid "%s <a href=\"https://jeweltheme.com/admin-bar-editor/pricing\" target=\"_blank\">Upgrade to Pro Now!</a>"
 msgstr ""
 
 #: ../Inc/Utils.php:511
@@ -62,19 +78,19 @@ msgstr ""
 msgid "No saved templates found!"
 msgstr ""
 
-#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:303
+#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:339
 msgid "Settings Saved"
 msgstr ""
 
-#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:319
+#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:355
 msgid "Settings reset"
 msgstr ""
 
-#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:347
+#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:383
 msgid "No options supplied to save"
 msgstr ""
 
-#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:353
+#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:389
 msgid "Menu Imported"
 msgstr ""
 
@@ -262,7 +278,7 @@ msgstr ""
 msgid "Activate"
 msgstr ""
 
-#: ../Libs/Recommended.php:250, ../Libs/License/Client.php:668, ../Libs/License/Loader.php:503
+#: ../Libs/Recommended.php:250, ../Pro/License/Client.php:662, ../Pro/License/Loader.php:504
 msgid "Activated"
 msgstr ""
 
@@ -306,182 +322,182 @@ msgstr ""
 msgid "Error exception."
 msgstr ""
 
-#: ../Libs/License/Client.php:156, ../Libs/License/Client.php:157, ../Libs/License/Client.php:268, ../Libs/License/Client.php:269
+#: ../Pro/License/Client.php:150, ../Pro/License/Client.php:151, ../Pro/License/Client.php:262, ../Pro/License/Client.php:263
 msgid "%s"
 msgstr ""
 
-#: ../Libs/License/Client.php:158, ../Libs/License/Client.php:623
+#: ../Pro/License/Client.php:152, ../Pro/License/Client.php:617
 msgid "API Key Activation"
 msgstr ""
 
-#: ../Libs/License/Client.php:159
+#: ../Pro/License/Client.php:153
 msgid "API Key Deactivation"
 msgstr ""
 
-#: ../Libs/License/Client.php:393
+#: ../Pro/License/Client.php:387
 msgid "Auto-updates unavailable."
 msgstr ""
 
-#: ../Libs/License/Client.php:414
+#: ../Pro/License/Client.php:408
 msgid "Enable auto-updates"
 msgstr ""
 
-#: ../Libs/License/Client.php:410
+#: ../Pro/License/Client.php:404
 msgid "Disable auto-updates"
 msgstr ""
 
-#: ../Libs/License/Client.php:404
+#: ../Pro/License/Client.php:398
 msgid "Auto-updates disabled"
 msgstr ""
 
-#: ../Libs/License/Client.php:402
+#: ../Pro/License/Client.php:396
 msgid "Auto-updates enabled"
 msgstr ""
 
-#: ../Libs/License/Client.php:517
+#: ../Pro/License/Client.php:511
 msgid "The API Key could not be deactivated. Use the API Key Deactivation tab to manually deactivate the API Key before activating a new API Key. If all else fails, go to Plugins, then deactivate and reactivate this plugin, or if a theme change themes, then change back to this theme, then go to the Settings for this plugin/theme and enter the API Key information again to activate it. Also check the My Account dashboard to see if the API Key for this site was still active before the error message was displayed."
 msgstr ""
 
-#: ../Libs/License/Client.php:544, ../Libs/License/Loader.php:412
+#: ../Pro/License/Client.php:538, ../Pro/License/Loader.php:413
 msgid "The <strong>%1$s</strong> API Key has not been activated, so the %2$s is inactive! %3$sClick here%4$s to activate <strong>%5$s</strong>."
 msgstr ""
 
-#: ../Libs/License/Client.php:562
+#: ../Pro/License/Client.php:556
 msgid "<b>Warning!</b> You're blocking external requests which means you won't be able to get %1$s updates. Please add %2$s to %3$s."
 msgstr ""
 
-#: ../Libs/License/Client.php:602, ../Libs/License/Client.php:598
+#: ../Pro/License/Client.php:596, ../Pro/License/Client.php:592
 msgid "Save Changes"
 msgstr ""
 
-#: ../Libs/License/Client.php:624
+#: ../Pro/License/Client.php:618
 msgid "API Key"
 msgstr ""
 
-#: ../Libs/License/Client.php:630, ../Libs/License/Loader.php:359, ../Libs/License/Loader.php:738
+#: ../Pro/License/Client.php:624, ../Pro/License/Loader.php:360, ../Pro/License/Loader.php:739
 msgid "Product ID"
 msgstr ""
 
-#: ../Libs/License/Client.php:642
+#: ../Pro/License/Client.php:636
 msgid "API Key Status"
 msgstr ""
 
-#: ../Libs/License/Client.php:643
+#: ../Pro/License/Client.php:637
 msgid "Activation Info"
 msgstr ""
 
-#: ../Libs/License/Client.php:647
+#: ../Pro/License/Client.php:641
 msgid "API Deactivation"
 msgstr ""
 
-#: ../Libs/License/Client.php:648
+#: ../Pro/License/Client.php:642
 msgid "Deactivate API Key"
 msgstr ""
 
-#: ../Libs/License/Client.php:673
+#: ../Pro/License/Client.php:667
 msgid "Deactivated"
 msgstr ""
 
-#: ../Libs/License/Client.php:754
+#: ../Pro/License/Client.php:748
 msgid "Previous activation attempt errors:"
 msgstr ""
 
-#: ../Libs/License/Client.php:881
+#: ../Pro/License/Client.php:875
 msgid "The API Key activation could not be completed due to an error on the store server or your server. See the Activation Error section below for details. The activation results were empty."
 msgstr ""
 
-#: ../Libs/License/Client.php:865, ../Libs/License/Loader.php:502
+#: ../Pro/License/Client.php:859, ../Pro/License/Loader.php:503
 msgid "%s activated. "
 msgstr ""
 
-#: ../Libs/License/Client.php:872
+#: ../Pro/License/Client.php:866
 msgid "Connection failed to the License Key API server. See the Activation Error section below for details. There may be a problem on your server preventing outgoing requests, or the store is blocking your request to activate the plugin/theme."
 msgstr ""
 
-#: ../Libs/License/Client.php:926
+#: ../Pro/License/Client.php:920
 msgid "The API Key activation could not be completed due to an unknown error possibly on the store server The activation results were empty."
 msgstr ""
 
-#: ../Libs/License/Client.php:915
+#: ../Pro/License/Client.php:909
 msgid "API Key deactivated. "
 msgstr ""
 
-#: ../Libs/License/Client.php:965
+#: ../Pro/License/Client.php:959
 msgid "Deactivates an API Key so it can be used on another blog."
 msgstr ""
 
-#: ../Libs/License/Client.php:989, ../Libs/License/Client.php:1036
+#: ../Pro/License/Client.php:983, ../Pro/License/Client.php:1030
 msgid "The API Key is missing from the deactivation request."
 msgstr ""
 
-#: ../Libs/License/Loader.php:349, ../Libs/License/Loader.php:728
+#: ../Pro/License/Loader.php:350, ../Pro/License/Loader.php:729
 msgid "License Key Activation"
 msgstr ""
 
-#: ../Libs/License/Loader.php:354, ../Libs/License/Loader.php:331, ../Libs/License/Loader.php:733, ../Libs/License/Loader.php:710
+#: ../Pro/License/Loader.php:355, ../Pro/License/Loader.php:332, ../Pro/License/Loader.php:734, ../Pro/License/Loader.php:711
 msgid "License Key"
 msgstr ""
 
-#: ../Libs/License/Loader.php:364, ../Libs/License/Loader.php:335, ../Libs/License/Loader.php:743, ../Libs/License/Loader.php:714
+#: ../Pro/License/Loader.php:365, ../Pro/License/Loader.php:336, ../Pro/License/Loader.php:744, ../Pro/License/Loader.php:715
 msgid "License Status"
 msgstr ""
 
-#: ../Libs/License/Loader.php:371, ../Libs/License/Loader.php:614, ../Libs/License/Loader.php:750
+#: ../Pro/License/Loader.php:372, ../Pro/License/Loader.php:615, ../Pro/License/Loader.php:751
 msgid "Activate License"
 msgstr ""
 
-#: ../Libs/License/Loader.php:322
+#: ../Pro/License/Loader.php:323
 msgid "License Key Deactivation"
 msgstr ""
 
-#: ../Libs/License/Loader.php:325
+#: ../Pro/License/Loader.php:326
 msgid "Deactivates an License Key Key so it can be used on another blog."
 msgstr ""
 
-#: ../Libs/License/Loader.php:342, ../Libs/License/Loader.php:612, ../Libs/License/Loader.php:721
+#: ../Pro/License/Loader.php:343, ../Pro/License/Loader.php:613, ../Pro/License/Loader.php:722
 msgid "Deactivate License"
 msgstr ""
 
-#: ../Libs/License/Loader.php:442
+#: ../Pro/License/Loader.php:443
 msgid "Oops! Security nonce is invalid."
 msgstr ""
 
-#: ../Libs/License/Loader.php:528, ../Libs/License/Loader.php:587
+#: ../Pro/License/Loader.php:529, ../Pro/License/Loader.php:588
 msgid "The License Key activation could not be commpleted due to an unknown error possibly on the store server The activation results were empty."
 msgstr ""
 
-#: ../Libs/License/Loader.php:512
+#: ../Pro/License/Loader.php:513
 msgid "Connection failed to the License Key API server. Try again later. There may be a problem on your server preventing outgoing requests, or the store is blocking your request to activate the plugin/theme."
 msgstr ""
 
-#: ../Libs/License/Loader.php:536
+#: ../Pro/License/Loader.php:537
 msgid "License or Product ID is invalid."
 msgstr ""
 
-#: ../Libs/License/Loader.php:553
+#: ../Pro/License/Loader.php:554
 msgid "The License Key is missing from the deactivation request."
 msgstr ""
 
-#: ../Libs/License/Loader.php:572
+#: ../Pro/License/Loader.php:573
 msgid "License Key deactivated. "
 msgstr ""
 
-#: ../Libs/License/Loader.php:596
+#: ../Pro/License/Loader.php:597
 msgid "The License Key is already deactivated."
 msgstr ""
 
-#: ../Libs/License/Loader.php:701
+#: ../Pro/License/Loader.php:702
 msgid "License Deactivation"
 msgstr ""
 
-#: ../Libs/License/Loader.php:704
+#: ../Pro/License/Loader.php:705
 msgid "Deactivates an License Key so it can be used on another blog."
 msgstr ""
 
-#: ../Libs/License/manager.php:31
+#: ../Pro/License/manager.php:36
 msgid "License"
 msgstr ""
 
-#: ../Libs/License/manager.php:32
+#: ../Pro/License/manager.php:37
 msgid "License Activation"
 msgstr ""

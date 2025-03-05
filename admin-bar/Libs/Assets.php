@@ -66,7 +66,9 @@ if ( ! class_exists( 'Assets' ) ) {
 					array(
 						'admin_ajax'        => admin_url( 'admin-ajax.php' ),
 						'recommended_nonce' => wp_create_nonce( 'jlt_admin_bar_editor_recommended_nonce' ),
-						'images'			=> JLT_ADMIN_BAR_EDITOR_IMAGES,
+						'images'            => JLT_ADMIN_BAR_EDITOR_IMAGES,
+						'is_premium'        => jlt_admin_bar_editor_is_premium(),
+						'is_agency'         => jlt_admin_bar_editor_is_plan( 'agency' ),
 					)
 				);
 			}

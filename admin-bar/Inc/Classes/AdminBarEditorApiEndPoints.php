@@ -28,7 +28,7 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
         $adminify_settings = get_option( '_wpadminify_backup' );
 
         if( empty($adminify_settings) || empty($adminify_settings['admin_bar_settings']) ) return;
-        
+
         $adminify_admin_bar_settings = $adminify_settings['admin_bar_settings'];
 
         // Move settings conditional array
@@ -53,8 +53,8 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
            'admin_bar_link_color.hover_color' => 'admin_bar_settings.admin_bar_new_button_color.hover_color'
 
         ];
-        
-         $move_data = \JewelTheme\AdminBarEditor\Inc\Utils::moveNestedKeys($adminify_admin_bar_settings, $move_settings);        
+
+         $move_data = \JewelTheme\AdminBarEditor\Inc\Utils::moveNestedKeys($adminify_admin_bar_settings, $move_settings);
 
         $admin_bar_settings = get_option( $this->prefix );
         $admin_bar_settings['admin_bar_settings'] = $move_data['admin_bar_settings'];
@@ -171,6 +171,7 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
         $user_roles_array = array_merge($user_roles_array, $user_roles);
 
         return [
+            'is_pro_user'                   => jlt_admin_bar_editor_is_premium(),
             'upgrade_pro_notice'            => Utils::jlt_admin_bar_upgrade_pro(),
             'admin_bar_backend'             => $formated_admin_menu,
             'admin_bar_frontend'            => $formated_front_menu,
@@ -192,20 +193,56 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
         return strpos($value->guid, "adminify-custom-icon") !== false;
     }
 
+    public function list_files_in_media_folder($base_dir) {
+        $base_url = wp_upload_dir()['baseurl'];
+        $attachments['images'] = null;
+        if (!is_dir($base_dir)) {
+            return array('error' => 'Uploads directory not found.');
+        }
+
+        // Helper function to recursively scan a directory
+        function scan_directory($dir) {
+            $files = [];
+            foreach (scandir($dir) as $file) {
+                if ($file === '.' || $file === '..') {
+                    continue;
+                }
+                $file_path = $dir . DIRECTORY_SEPARATOR . $file;
+                if (is_dir($file_path)) {
+                    $files = array_merge($files, scan_directory($file_path));
+                } else {
+                    $files[] = $file_path;
+                }
+            }
+            return $files;
+        }
+
+        // Scan the uploads directory
+        $all_files = scan_directory($base_dir);
+
+        // Filter out auto-generated files using regex
+        $filtered_files = array_filter($all_files, function ($file) {
+            // Match files without auto-generated suffixes
+            return !preg_match('/-\d+x\d+\.|scaled\./', $file);
+        });
+        foreach ($filtered_files as $file_path) {
+            $file_url = str_replace($base_dir, $base_url . '/adminify-custom-icons' , $file_path);
+            $attachment_id = attachment_url_to_postid($file_url);
+
+            if ($attachment_id) {
+                $attachments['images'][$attachment_id] = $file_url;
+            }
+        }
+
+        return $attachments;
+    }
+
     public function get_adminbar_menu_icons()
     {
         $result['images'] = null;
-        $query = get_posts(
-            [
-                'post_type' => 'attachment',
-                'numberposts' => -1
-            ]
-        );
-        $filtered = array_filter($query, [$this, 'filter_attachment']);
-        foreach ($filtered as $key => $value) {
-            $result['images'][$value->ID] = $value->guid;
-        }
-        return $result;
+        $upload_dir = \wp_upload_dir();
+        $targeted_dir = $upload_dir['basedir'] . '/adminify-custom-icons';
+        return $this->list_files_in_media_folder( $targeted_dir );
     }
 
     public function upload_adminbar_menu_icon($request)
