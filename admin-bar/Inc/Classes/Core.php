@@ -473,6 +473,7 @@ if (!class_exists('Core')) {
                 // if existing title_default then title_default
                 // if not existing saved_title_default then saved_title_default
                 $howdy_title = '';
+                $custom_howdy_title = 0;
                 if( is_admin()){
                     if( !empty($this->admin_bar_options['saved_admin_bar']['my-account']['title'] ) ){
                         $howdy_title = $this->admin_bar_options['saved_admin_bar']['my-account']['title'];
@@ -486,13 +487,20 @@ if (!class_exists('Core')) {
                         $howdy_title = $this->admin_bar_options['existing_admin_bar_frontend']['my-account']['title_default'];
                     }
                 }
-                
-                if( $menu_id === 'my-account'){
+                if (strpos($howdy_title, '<span class="display-name"') !== false) {
+                    $custom_howdy_title = 1;
+                }
+
+                if( $menu_id === 'my-account' ){
                     $current_user  = wp_get_current_user();
                     $user_id       = get_current_user_id();
                     $avatar        = get_avatar($user_id, 26);     // size 26x26 pixels
                     $display_name  = $current_user->display_name;
-                    $menu['title'] = $howdy_title . ', ' . $display_name . $avatar; 
+                    if($custom_howdy_title){
+                        $menu['title'] = $howdy_title; 
+                    }else{
+                        $menu['title'] = $howdy_title . ' ' . $display_name . $avatar; 
+                    }
                 }
                 if($menu_id === 'user-info') {
                     $current_user  = wp_get_current_user();

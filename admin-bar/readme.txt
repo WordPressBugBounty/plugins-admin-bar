@@ -3,8 +3,8 @@ Contributors: litonice13, pixarlabs, jwthemeltd
 Donate link: https://www.buymeacoffee.com/jeweltheme
 Tags: admin bar, hide admin bar, admin bar position, toolbar, customization 
 Requires at least: 4.0
-Tested up to: 6.7.2
-Stable tag: 1.0.4.0
+Tested up to: 6.9
+Stable tag: 1.1.0
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -165,3 +165,52 @@ Absolutely! You can add new menu items with custom links to both the main admin 
 The plugin provides comprehensive tools to control admin bar visibility and access based on user roles or individual usernames. 
 
 Need help customizing your WordPress toolbar? Visit our support forum for assistance with the Admin Bar Editor plugin.
+
+
+== Changelog ==
+= 1.1.0 (31-05-2025) =
+* Fixed: logout action taking confirmation issue Support url: https://wordpress.org/support/topic/logout-confirmation-link/
+* Fixed: Deprecation notice issue of str_getcsv() without escape value, Support URL: https://wordpress.org/support/topic/deprecated-85/
+* Fixed : Duplicated user name on the top right profile tab issue, Support URL: https://wordpress.org/support/topic/duplicated-user-name-on-the-or-profile-tab/
+* Fixed: The WordPress admin menu’s submenu items are positioned incorrectly, extending beyond the screen’s bottom edge. Now adjusted with a 30px gap 
+
+= 1.0.4.0 (05-03-2025) =
+* Updated: Frontend style not working issue updated
+* Updated: Attachment image for icons updated
+* Updated: Admin settings panel updated
+* Updated: Toaster position change to top-right corner
+* Updated: Loading image updated
+* Updated: Screenshot & Banner image updated
+* Fixed: Custom icons uploader "Select Files" color issue fixed
+* Fixed: Menu item image height fixed
+* Fixed: User info showing wrong name 
+* Fixed: Admin bar editor is not synced once new item added or deleted.
+
+= 1.0.3.1 (22-12-2024) =
+* Update: Query optimization and security measures
+
+= 1.0.3.0 (31-10-2024) =
+* Fixed: Free vs Pro License and Activation issue fixed
+
+= 1.0.2.9 (14-10-2024) =
+* Updated: "Howdy" Text Change option not working issue fixed
+* Fixed: Hidden For Admin Bar Item Compatibility with WP Adminify
+* Fixed: Option Page not showing Compatibility with WP Adminify
+
+= 1.0.2.8 (7-9-2024) =
+* Updated: UI Improvements
+
+= 1.0.2.7 (31-08-2024) =
+* Fixed: CSS issue fix
+* Fixed: Pre-loader image issue
+
+= 1.0.2.6 (29-08-2024) =
+* Updated: Added Advanced Tab for managing CSS for Admin bar
+* Updated: Compatibility with WP Adminify
+* Fixed: Active tab issue fixed
+* Added: Data Migration add with WP Adminify
+
+= 1.0.2.5 (08-05-2024) =
+* Updated: Console log DOM error issue fixed
+* Updated: Frontend Assets update
+* Updated: Display name issue fixed
