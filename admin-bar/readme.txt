@@ -1,10 +1,10 @@
 === Admin Bar Editor - Toolbar Customization with User Role based access & Custom menus ===
 Contributors: litonice13, pixarlabs, jwthemeltd
 Donate link: https://www.buymeacoffee.com/jeweltheme
-Tags: admin bar, hide admin bar, admin bar position, toolbar, customization 
+Tags: admin bar, hide admin bar, admin bar position, toolbar, customization
 Requires at least: 4.0
 Tested up to: 6.9
-Stable tag: 1.1.0
+Stable tag: 1.1.2
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -13,15 +13,15 @@ Hide Admin bar or toolbar based on user role and add custom links, reorder, chan
 
 == Description ==
 
-The [Admin Bar Editor](https://jeweltheme.com/admin-bar-editor) plugin revolutionizes how you customize and manage the WordPress admin bar and toolbar. 
+The [Admin Bar Editor](https://jeweltheme.com/admin-bar-editor) plugin revolutionizes how you customize and manage the WordPress admin bar and toolbar.
 
-Whether you need to move admin bar position, style your toolbar, or control admin bar permissions, this powerful plugin provides complete customization options for both backend and frontend admin bars. 
+Whether you need to move admin bar position, style your toolbar, or control admin bar permissions, this powerful plugin provides complete customization options for both backend and frontend admin bars.
 
-Easily hide admin bar elements, add custom menu items, create nested submenus, and manage toolbar visibility for different user roles. From changing admin bar colors to controlling dropdown menus, every aspect of your WordPress toolbar can be personalized to match your workflow. 
+Easily hide admin bar elements, add custom menu items, create nested submenus, and manage toolbar visibility for different user roles. From changing admin bar colors to controlling dropdown menus, every aspect of your WordPress toolbar can be personalized to match your workflow.
 
 The Admin Bar Editor offers intuitive tools to disable frontend admin bar, customize toolbar appearance, and manage admin bar access across your entire WordPress site.
 
-[Documentation](https://jeweltheme.com/docs/admin-bar-editor/plugin-installation) | [Check Pricing](https://jeweltheme.com/admin-bar-editor)
+[Live Demo](https://demo.pixarlabs.com/?pl-product=admin-bar) | [Docs](https://jeweltheme.com/docs/admin-bar-editor)  | [Support](https://wordpress.org/support/plugin/admin-bar/#new-topic-0) | [Upgrade Pro](https://jeweltheme.com/admin-bar-editor)
 
 
 
@@ -126,7 +126,7 @@ For any questions, get in touch with us via our [Contact Page](https://wordpress
 3. WordPress Frontend toolbar customization option
 4. Hide WordPress Admin Bar or Toolbar for specific user role or user name
 5. Change Admin bar background color, gradient, text color, dropdown style, new button color
-6. Change Admin Bar Editor position in top or bottom 
+6. Change Admin Bar Editor position in top or bottom
 7. Add Custom Menu or links in the Admin Bar or Toolbar
 
 == Installation ==
@@ -162,17 +162,20 @@ Absolutely! You can add new menu items with custom links to both the main admin 
 
 = How do I manage admin bar permissions for different users? =
 
-The plugin provides comprehensive tools to control admin bar visibility and access based on user roles or individual usernames. 
+The plugin provides comprehensive tools to control admin bar visibility and access based on user roles or individual usernames.
 
 Need help customizing your WordPress toolbar? Visit our support forum for assistance with the Admin Bar Editor plugin.
 
 
 == Changelog ==
+=  1.1.1 (10-07-2025) =
+* Fixed: Edit site link was unavailable on admin bar editor.
+
 = 1.1.0 (31-05-2025) =
 * Fixed: logout action taking confirmation issue Support url: https://wordpress.org/support/topic/logout-confirmation-link/
 * Fixed: Deprecation notice issue of str_getcsv() without escape value, Support URL: https://wordpress.org/support/topic/deprecated-85/
 * Fixed : Duplicated user name on the top right profile tab issue, Support URL: https://wordpress.org/support/topic/duplicated-user-name-on-the-or-profile-tab/
-* Fixed: The WordPress admin menu’s submenu items are positioned incorrectly, extending beyond the screen’s bottom edge. Now adjusted with a 30px gap 
+* Fixed: The WordPress admin menu’s submenu items are positioned incorrectly, extending beyond the screen’s bottom edge. Now adjusted with a 30px gap
 
 = 1.0.4.0 (05-03-2025) =
 * Updated: Frontend style not working issue updated
@@ -183,7 +186,7 @@ Need help customizing your WordPress toolbar? Visit our support forum for assist
 * Updated: Screenshot & Banner image updated
 * Fixed: Custom icons uploader "Select Files" color issue fixed
 * Fixed: Menu item image height fixed
-* Fixed: User info showing wrong name 
+* Fixed: User info showing wrong name
 * Fixed: Admin bar editor is not synced once new item added or deleted.
 
 = 1.0.3.1 (22-12-2024) =
@@ -214,3 +217,7 @@ Need help customizing your WordPress toolbar? Visit our support forum for assist
 * Updated: Console log DOM error issue fixed
 * Updated: Frontend Assets update
 * Updated: Display name issue fixed
+
+Details [changelog here](https://jeweltheme.com/docs/admin-bar-editor/changelogs)
+
+== Upgrade Notice ==

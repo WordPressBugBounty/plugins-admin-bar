@@ -1,9 +1,15 @@
 == Changelog ==
+= 1.1.2 (10-07-2025) =
+* Fixed: Edit site link was unavailable on admin bar editor.
+
+= 1.1.1 (14-08-2025) =
+* Fixed: Conflicting with WP Adminify White Label issue fixed
+
 = 1.1.0 (31-05-2025) =
 * Fixed: logout action taking confirmation issue Support url: https://wordpress.org/support/topic/logout-confirmation-link/
 * Fixed: Deprecation notice issue of str_getcsv() without escape value, Support URL: https://wordpress.org/support/topic/deprecated-85/
 * Fixed : Duplicated user name on the top right profile tab issue, Support URL: https://wordpress.org/support/topic/duplicated-user-name-on-the-or-profile-tab/
-* Fixed: The WordPress admin menu’s submenu items are positioned incorrectly, extending beyond the screen’s bottom edge. Now adjusted with a 30px gap 
+* Fixed: The WordPress admin menu’s submenu items are positioned incorrectly, extending beyond the screen’s bottom edge. Now adjusted with a 30px gap
 
 = 1.0.4.0 (05-03-2025) =
 * Updated: Frontend style not working issue updated
@@ -14,7 +20,7 @@
 * Updated: Screenshot & Banner image updated
 * Fixed: Custom icons uploader "Select Files" color issue fixed
 * Fixed: Menu item image height fixed
-* Fixed: User info showing wrong name 
+* Fixed: User info showing wrong name
 * Fixed: Admin bar editor is not synced once new item added or deleted.
 
 = 1.0.3.1 (22-12-2024) =

@@ -108,6 +108,74 @@ function jlt_admin_bar_editor_update_logout_nonce_script() {
 add_action('admin_footer', 'jlt_admin_bar_editor_update_logout_nonce_script');
 add_action('wp_footer', 'jlt_admin_bar_editor_update_logout_nonce_script');
 
+function jlt_admin_bar_editor_update_edit_site_url_script() {
+    if ( current_user_can( 'edit_theme_options' ) ) {
+        $site_editor_url = get_the_current_site_editor_url();
+        if( !empty( $site_editor_url ) ) {
+            ?>
+            <script>
+                (function() {
+                    var siteEditUrl = <?php echo json_encode($site_editor_url); ?>;
+                    var $siteEditor = document.querySelector("#wp-admin-bar-site-editor a");
+                    if ($siteEditor) {
+                        $siteEditor.setAttribute("href", siteEditUrl);
+                    }
+                })();
+            </script>
+            <?php
+        }
+    }
+}
+
+add_action('wp_footer', 'jlt_admin_bar_editor_update_edit_site_url_script');
+
+function get_the_current_site_editor_url() {
+    if ( ! current_theme_supports( 'block-templates' ) || ! current_user_can( 'edit_theme_options' ) ) {
+        return '';
+    }
+
+    $site_editor_url = '';
+    $theme_slug      = get_stylesheet(); 
+
+    $template_slug = 'index'; 
+
+    if ( is_front_page() || is_home() ) {
+        if ( function_exists( 'wp_get_theme_file_path' ) && file_exists( wp_get_theme_file_path( 'templates/home.html' ) ) ) {
+            $template_slug = 'home';
+        } else {
+            $template_slug = 'index'; 
+        }
+    } elseif ( is_singular() ) {
+        $post_type_object = get_post_type_object( get_post_type() );
+        if ( $post_type_object && ! empty( $post_type_object->template ) ) {
+            $template_slug = $post_type_object->template;
+        } else {
+            if ( is_page() ) {
+                $template_slug = 'page'; 
+            } else {
+                $template_slug = 'single'; 
+            }
+        }
+    } elseif ( is_archive() ) {
+        $template_slug = 'archive';
+    } elseif ( is_search() ) {
+        $template_slug = 'search';
+    } elseif ( is_404() ) {
+        $template_slug = '404';
+    }
+    $post_id_param = $theme_slug . '//' . $template_slug;
+    $site_editor_url = add_query_arg(
+        array(
+            'postType' => 'wp_template',
+            'postId'   => urlencode( $post_id_param ),
+            'canvas'   => 'edit',
+        ),
+        admin_url( 'site-editor.php' )
+    );
+
+    return esc_url( $site_editor_url );
+}
+
 
 function jlt_admin_bar_fix_admin_menu_submenu_position() {
 	?>

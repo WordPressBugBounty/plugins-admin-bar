@@ -42,10 +42,8 @@ if ( ! class_exists( 'Assets' ) ) {
 		 */
 		public function jlt_admin_bar_editor_admin_enqueue_scripts() {
 
-			$screen = get_current_screen();
-
-			if ( 'toplevel_page_jlt_admin_bar_editor-settings' === $screen->id || 'wp-adminify_page_jlt_admin_bar_editor-settings' === $screen->id || 'wp-adminify-pro_page_jlt_admin_bar_editor-settings' === $screen->id) {
-
+			$admin_bar_page_slug  = isset( $_GET['page'] ) ? sanitize_key( $_GET['page'] ) : '';
+			if ( $admin_bar_page_slug ==='jlt_admin_bar_editor-settings') {
 				// Fonts CSS
 				wp_register_style('jlt-admin-bar-simple-line-icons', JLT_ADMIN_BAR_EDITOR_ASSETS . 'fonts/simple-line-icons/css/simple-line-icons.css', false, JLT_ADMIN_BAR_EDITOR_VER);
 				wp_register_style('jlt-admin-bar-icomoon', JLT_ADMIN_BAR_EDITOR_ASSETS . 'fonts/icomoon/style.css', false, JLT_ADMIN_BAR_EDITOR_VER);
@@ -72,6 +70,7 @@ if ( ! class_exists( 'Assets' ) ) {
 					)
 				);
 			}
+
 			wp_enqueue_style('jlt-admin-bar-sdk', JLT_ADMIN_BAR_EDITOR_ASSETS . 'css/admin-bar-sdk.min.css', array('dashicons'), JLT_ADMIN_BAR_EDITOR_VER, 'all');
 
 

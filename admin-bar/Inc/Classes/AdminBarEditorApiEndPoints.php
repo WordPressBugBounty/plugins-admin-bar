@@ -157,6 +157,7 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
         $saved_admin_bar_frontend         = !empty($admin_bar_items['saved_admin_bar_frontend']) ? $admin_bar_items['saved_admin_bar_frontend'] : [];
 
         $parsed_admin_bar_frontend        = empty($saved_admin_bar_frontend) ? $existing_admin_bar_frontend : Core::parse_menu_items($saved_admin_bar_frontend, $existing_admin_bar_frontend, 'frontend');
+
         $nested_front_bar                 = Core::format_to_nested($parsed_admin_bar_frontend);
         $formated_front_menu              = Core::associative_to_index_array($nested_front_bar);
 
