@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-08-14 08:14+0000\n"
+"POT-Creation-Date: 2025-09-04 12:06+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -78,19 +78,19 @@ msgstr ""
 msgid "No saved templates found!"
 msgstr ""
 
-#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:340
+#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:344
 msgid "Settings Saved"
 msgstr ""
 
-#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:356
+#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:360
 msgid "Settings reset"
 msgstr ""
 
-#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:384
+#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:388
 msgid "No options supplied to save"
 msgstr ""
 
-#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:390
+#: ../Inc/Classes/AdminBarEditorApiEndPoints.php:394
 msgid "Menu Imported"
 msgstr ""
 

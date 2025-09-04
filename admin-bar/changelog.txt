@@ -1,4 +1,10 @@
 == Changelog ==
+= 1.1.2.0 (04-09-2025) =
+* Fixed: Logout url redirecting to confirmation page issue.
+* Fixed: Admin bar caching url for third party plugins menu item.
+* Improve: Editor will not allow to update url for default menu items.
+* UX Improvement: Editor UX is updated.
+
 = 1.1.2 (10-07-2025) =
 * Fixed: Edit site link was unavailable on admin bar editor.
 

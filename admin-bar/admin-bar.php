@@ -3,8 +3,8 @@
 /**
  * Plugin Name: Admin Bar Editor
  * Plugin URI:  https://jeweltheme.com
- * Description: This plugin turns on or off Admin Bar in front end, for all users and customize backend admin bar.
- * Version:     1.1.2
+ * Description: Hide Admin bar or toolbar based on user role and add custom links, reorder, change WordPress logo & howdy text. Change bar position, background color.
+ * Version:     1.1.2.0
  * Author:      Jewel Theme
  * Author URI:  https://jeweltheme.com/admin-bar-editor
  * Text Domain: admin-bar

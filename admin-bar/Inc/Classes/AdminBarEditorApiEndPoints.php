@@ -315,6 +315,10 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
         $admin_bar_backend  = Core::assoc_to_flat_array($request['admin_bar_backend']);
         $admin_bar_frontend = Core::assoc_to_flat_array($request['admin_bar_frontend']);
 
+        // Process menu items: remove href for non-custom items, clean logout URLs
+        $admin_bar_backend = $this->process_menu_items_for_save($admin_bar_backend);
+        $admin_bar_frontend = $this->process_menu_items_for_save($admin_bar_frontend);
+
         // Admin Bar Advanced Settings
         $admin_bar_items['admin_bar_settings'] = $request['admin_bar_settings'];
 
@@ -415,6 +419,44 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
         }
 
         return $values;
+    }
+
+    /**
+     * Process menu items before saving to database
+     * - For non-custom items: remove href to always use WordPress defaults
+     * - For custom items: keep the href value
+     * - For logout items: strip nonce values
+     * @param array $menu_items Admin bar menu items
+     * @return array Modified menu items
+     */
+    private function process_menu_items_for_save($menu_items)
+    {
+        if (!is_array($menu_items)) {
+            return $menu_items;
+        }
+
+        foreach ($menu_items as $key => &$item) {
+            // Only keep href for custom menu items (newly_created = 1)
+            if (isset($item['newly_created']) && $item['newly_created'] != 1) {
+                // For non-custom items, remove the href completely
+                // This ensures we always use WordPress default URLs
+                unset($item['href']);
+            } else if (isset($item['href'])) {
+                // For custom items, keep the href but clean logout URLs
+                if (isset($item['id']) && $item['id'] === 'logout') {
+                    // Remove any nonce parameters from logout URLs
+                    $item['href'] = preg_replace('/([?&])_wpnonce=[^&]*(&|$)/', '$1', $item['href']);
+                    $item['href'] = rtrim($item['href'], '?&');
+                }
+            }
+
+            // Process submenu items recursively
+            if (isset($item['submenu']) && is_array($item['submenu'])) {
+                $item['submenu'] = $this->process_menu_items_for_save($item['submenu']);
+            }
+        }
+
+        return $menu_items;
     }
 
     /**

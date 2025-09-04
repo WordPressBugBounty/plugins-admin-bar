@@ -24,6 +24,8 @@ if (!class_exists('Core')) {
     {
         public $adminify_ui;
         public $admin_bar_options;
+        private $original_nodes = [];
+        private $current_admin_bar_nodes = [];
 
         public function __construct()
         {
@@ -179,6 +181,7 @@ if (!class_exists('Core')) {
         public function get_admin_bar_menu_list()
         {
             global $wp_admin_bar;
+
             $syned = false;
             if( is_admin()){
                 $previous_admin_bar = get_option('previous_admin_bar_backend');
@@ -193,6 +196,8 @@ if (!class_exists('Core')) {
             }else{
                 update_option($this->prefix . '_is_synced', false);
             }
+            
+            $this->current_admin_bar_nodes = $wp_admin_bar->get_nodes();
             // if (is_admin()) {
             //     $wp_admin_bar->remove_menu('menu-toggle');
             //     $wp_admin_bar->remove_menu('wp-logo');
@@ -421,13 +426,10 @@ if (!class_exists('Core')) {
             global $wp_admin_bar;
 
             $existing_menu = $wp_admin_bar->get_nodes();
+            $this->original_nodes = $existing_menu;
 
             $admin_bar_items = (new AdminBarEditorOptions())->get();
 
-            // Remove all nodes.
-            foreach ($existing_menu as $node_id => $node) {
-                $wp_admin_bar->remove_node($node_id);
-            }
 
             if (is_admin()) {
                 $existing_admin_bar = !empty($admin_bar_items['existing_admin_bar']) ? $admin_bar_items['existing_admin_bar'] : [];
@@ -439,6 +441,15 @@ if (!class_exists('Core')) {
                 $existing_admin_bar_frontend = !empty($admin_bar_items['existing_admin_bar_frontend']) ? $admin_bar_items['existing_admin_bar_frontend'] : [];
                 $saved_admin_bar_frontend    = !empty($admin_bar_items['saved_admin_bar_frontend']) ? $admin_bar_items['saved_admin_bar_frontend'] : $existing_admin_bar_frontend;
                 $parsed_menu        = empty($saved_admin_bar_frontend) ? $existing_admin_bar_frontend : self::parse_menu_items($saved_admin_bar_frontend, $existing_admin_bar_frontend, 'frontend');
+            }
+            // Remove all nodes.
+            foreach ($existing_menu as $node_id => $node) {
+                if( array_key_exists($node->id, $parsed_menu ) ){
+                    if( isset($node->href) && !empty($node->href)){
+                        $parsed_menu[$node->id]['href'] = $node->href;
+                    }
+                }
+                $wp_admin_bar->remove_node($node_id);
             }
 
             // Convert $parsed_menu to array of nodes.
@@ -522,7 +533,22 @@ if (!class_exists('Core')) {
                         if ( false === stripos($arg_key, '_default') && 'newly_created' !== $arg_key && 'icon' !== $arg_key ) {
                             $value = $arg_value;
 
-                            if ('' === $value) {
+                            // For non-custom menu items, always use fresh href from original nodes
+                            if ($arg_key === 'href') {
+                                if (isset($menu['newly_created']) && $menu['newly_created'] == 1) {
+                                    // Custom menu item - use the saved href
+                                    $value = $arg_value;
+                                } else {
+                                    // Non-custom menu item - get fresh URL from original nodes
+                                    if (isset($this->original_nodes[$menu['id']])) {
+                                        $value = $this->original_nodes[$menu['id']]->href;
+                                    } elseif (isset($menu['href_default'])) {
+                                        $value = $menu['href_default'];
+                                    } else {
+                                        $value = '';
+                                    }
+                                }
+                            } elseif ('' === $value) {
                                 if ($arg_key != 'hidden_for') {
                                     $value = $menu[$arg_key . '_default'];
                                 }
@@ -667,6 +693,11 @@ if (!class_exists('Core')) {
         {
             $admin_bar_array = array();
             foreach ($nodes as $node_id => $node) {
+                // For custom menu items, store the URL
+                // For all other items, don't store URLs - they'll be fetched fresh
+                $is_custom_menu = strpos($node_id, 'custom-menu-') === 0;
+                $href_to_store = $is_custom_menu ? $node->href : '';
+                
                 $admin_bar_array[$node_id] = array(
                     'icon'                   => '',
                     'icon_default'           => $this->add_default_icon($node->id),
@@ -676,15 +707,15 @@ if (!class_exists('Core')) {
                     'title_default'          => $node->title,
                     'parent'                 => $node->parent,
                     'parent_default'         => $node->parent,
-                    'href'                   => '',
-                    'href_default'           => $node->href,
+                    'href'                   => $href_to_store,
+                    'href_default'           => $href_to_store, // Store URL only for custom items
                     'group'                  => $node->group,
                     'group_default'          => $node->group,
                     'meta'                   => $node->meta,
                     'meta_default'           => $node->meta,
                     'submenu'                => array(),
                     'hidden_for'             => '',
-                    'newly_created'          => 0,
+                    'newly_created'          => $is_custom_menu ? 1 : 0,
                     'menu_level'             => 0,
                     'menu_status'            => true,
                     'frontend_only'          => ($type == 'backend') ? 0 : 1,
