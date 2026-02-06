@@ -44,19 +44,30 @@ if ( ! class_exists( '\JewelTheme\AdminBarEditor\AdminBarEditor' ) ) {
 		 * @author Jewel Theme <support@jeweltheme.com>
 		 */
 		public function __construct() {
-			add_action( 'plugins_loaded', array( $this, 'jlt_admin_bar_editor_plugins_loaded' ));
+			add_action( 'plugins_loaded', array( $this, 'jlt_admin_bar_editor_plugins_loaded' ) );
 
 			// Body Class.
 			add_filter( 'admin_body_class', array( $this, 'jlt_admin_bar_editor_body_class' ) );
 			add_filter( 'body_class', array( $this, 'jlt_admin_bar_editor_body_class' ) );
 
 			// This should run earlier .
-			// add_action( 'plugins_loaded', [ $this, 'jlt_admin_bar_editor_maybe_run_upgrades' ], -100 ); .
+			add_action( 'plugins_loaded', [ $this, 'jlt_admin_bar_editor_maybe_run_upgrades' ], -100 );
 
-			if (Utils::is_plugin_active('adminify/adminify.php') || Utils::is_plugin_active('adminify-pro/adminify.php')) {
-				add_action('admin_menu', [$this, 'jltwp_adminify_adminbar_submenu'], 13);
+			// Register admin menu - check for Adminify plugin is done in the callback
+			add_action( 'admin_menu', array( $this, 'register_admin_menu' ), 13 );
+		}
+
+		/**
+		 * Register Admin Menu
+		 * Checks if Adminify plugin is active and registers appropriate menu
+		 *
+		 * @return void
+		 */
+		public function register_admin_menu() {
+			if ( Utils::is_plugin_active( 'adminify/adminify.php' ) || Utils::is_plugin_active( 'adminify-pro/adminify.php' ) ) {
+				$this->jltwp_adminify_adminbar_submenu();
 			} else {
-				add_action( 'admin_menu', array( $this, 'settings_menu' ), 32);
+				$this->settings_menu();
 			}
 		}
 
@@ -211,23 +222,8 @@ if ( ! class_exists( '\JewelTheme\AdminBarEditor\AdminBarEditor' ) ) {
 		 * @author Jewel Theme <support@jeweltheme.com>
 		 */
 		public function jlt_admin_bar_editor_init() {
-			$this->jlt_admin_bar_editor_load_textdomain();
-		}
-
-
-		/**
-		 * Text Domain
-		 *
-		 * @author Jewel Theme <support@jeweltheme.com>
-		 */
-		public function jlt_admin_bar_editor_load_textdomain() {
-			add_action('init', function () {
-				$domain = 'admin-bar';
-				$locale = apply_filters('jlt_admin_bar_editor_plugin_locale', get_locale(), $domain);
-
-				load_textdomain($domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo');
-				load_plugin_textdomain( $domain, false, dirname( JLT_ADMIN_BAR_EDITOR_BASE ) . '/languages/' );
-			});
+			// WordPress 6.7+ automatically loads text domains based on plugin headers.
+			// Manual loading is no longer needed.
 		}
 
 		/**

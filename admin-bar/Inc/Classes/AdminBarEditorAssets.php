@@ -135,6 +135,14 @@ class AdminBarEditorAssets extends AdminBarEditorModel
             }
         }
 
+        // Custom Image Style
+        $admin_bar_css .= '#wpadminbar li .jlt-admin-bar-menu-image  {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;  
+        }';
+
         return $admin_bar_css;
     }
 
@@ -239,7 +247,7 @@ class AdminBarEditorAssets extends AdminBarEditorModel
 
     public function adminbar_editor_enqueue_scripts()
     {
-        global $pagenow, $wp_roles;
+        global $pagenow;
 
         if (('admin.php' === $pagenow) && ('jlt_admin_bar_editor-settings' === $_GET['page'])) {
             // Enqueue Styles
@@ -274,8 +282,6 @@ class AdminBarEditorAssets extends AdminBarEditorModel
             'uploaded_url'             => wp_upload_dir()['baseurl'],
             'image_path'               => JLT_ADMIN_BAR_EDITOR_IMAGES,
             'nonce'                    => wp_create_nonce( 'wp_rest' ),
-            'wp_roles' => $wp_roles->roles,
-            'wp_users' => get_users(),
             'adminify_ui' => class_exists('\WPAdminify\Inc\Admin\AdminSettings') ?  \WPAdminify\Inc\Admin\AdminSettings::get_instance()->get()['admin_ui'] : false,
         );
         wp_localize_script('jlt-admin-bar-admin', 'JltAdminBarEditor', $localize_adminbar_data);

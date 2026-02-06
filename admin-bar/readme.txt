@@ -3,121 +3,122 @@ Contributors: litonice13, pixarlabs, jwthemeltd
 Donate link: https://www.buymeacoffee.com/jeweltheme
 Tags: admin bar, hide admin bar, admin bar position, toolbar, customization
 Requires at least: 4.0
-Tested up to: 6.8.2
-Stable tag: 1.1.2.0
+Tested up to: 6.9
+Stable tag: 1.1.4
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Hide Admin bar or toolbar based on user role and add custom links, reorder, change WordPress logo & howdy text. Change bar position, background color.
+Take full control of your WordPress admin bar: hide items, reorder menus, and design a cleaner toolbar for every user.
 
 == Description ==
 
-The [Admin Bar Editor](https://jeweltheme.com/admin-bar-editor) plugin revolutionizes how you customize and manage the WordPress admin bar and toolbar.
+**Admin Bar Editor** lets you visually customize the WordPress toolbar (admin bar) for both backend and frontend so you can keep what matters and hide what does not.
 
-Whether you need to move admin bar position, style your toolbar, or control admin bar permissions, this powerful plugin provides complete customization options for both backend and frontend admin bars.
+You can quickly disable the frontend admin bar, turn off specific toolbar items, and reorganize menus with a clean drag-and-drop interface - no code required. This makes the toolbar faster to use for you, your team, and your clients.
 
-Easily hide admin bar elements, add custom menu items, create nested submenus, and manage toolbar visibility for different user roles. From changing admin bar colors to controlling dropdown menus, every aspect of your WordPress toolbar can be personalized to match your workflow.
+= Why customize the WordPress admin bar? =
 
-The Admin Bar Editor offers intuitive tools to disable frontend admin bar, customize toolbar appearance, and manage admin bar access across your entire WordPress site.
+The default admin bar often gets cluttered with links from themes, plugins, and WordPress core. This can:
 
-[Live Demo](https://demo.pixarlabs.com/?pl-product=admin-bar) | [Docs](https://jeweltheme.com/docs/admin-bar-editor)  | [Support](https://wordpress.org/support/plugin/admin-bar/#new-topic-0) | [Upgrade Pro](https://jeweltheme.com/admin-bar-editor)
+* Distract non-technical users with unnecessary options.
+* Slow down power users who need quick access to key tools.
+* Look confusing on membership, LMS, or WooCommerce sites where many users log in.
 
+Admin Bar Editor gives you precise control over what appears in the toolbar so each role sees a clean, focused experience.
 
+[**Admin Bar Editor Pro**](https://jeweltheme.com/admin-bar-editor?utm_source=wordpressorg&utm_medium=readme&utm_campaign=admin-bar) | [**Try Live Demo**](https://demo.pixarlabs.com/?pl-product=admin-bar) | [**Documentation**](https://jeweltheme.com/docs/admin-bar-editor/plugin-installation?utm_source=wordpressorg&utm_medium=readme&utm_campaign=admin-bar) 
 
-== 🚀 Why Admin Bar Editor? ==
+= Who is Admin Bar Editor for? =
 
-1. **One-Click Frontend Admin Bar Disabling**: Disable the frontend Admin Bar with a single click, providing a cleaner look and distraction-free experience for your website visitors.
+* **Site Owners & Bloggers** – Hide clutter, keep only the shortcuts you actually use.
+* **Agencies & Freelancers** – Deliver white-labeled, role-based toolbars for client sites.
+* **Membership, LMS & Community Sites** – Simplify the frontend admin bar for members and instructors.
+* **Product & Support Teams** – Create focused dashboards for editors, authors, and support users.
 
-2. **User-Specific Admin Bar Management**: Customize the frontend visibility of the Admin Bar for individual users or specific roles, ensuring a personalized and role-appropriate interface.
+= How Admin Bar Editor works =
 
-3. **Selective Option Visibility**: Hide certain Admin Bar options to declutter the interface, focusing on the tools and shortcuts that matter most to you and your team.
+The plugin adds an **AdminBar Editor** page in your dashboard with three main sections: **Backend**, **Frontend**, and **Advanced**.
 
-4. **Role-Based Option Hiding**: Customize the Admin Bar's appearance on a per-role basis, hiding irrelevant options for different user roles to streamline their admin experience.
+* In **Backend**, you control the admin bar that appears inside wp-admin. You can toggle core items like the WordPress logo, site name, comments, updates, and the “New” menu, and adjust submenu visibility.
+* In **Frontend**, you manage the toolbar shown on the public side of your site, including a global switch to disable the frontend admin bar.
+* In **Advanced**, you can change the admin bar position (top or bottom) and, in Pro, style colors, gradients, and button appearance.
 
-5. **Icon Customization**: Change the icons for existing Admin Bar options to match your brand or personal preference, adding a touch of personality to your admin space.
+All changes are applied instantly when you save settings and can be adjusted at any time.
 
-6. **Menu Renaming and Linking**: Rename Admin Bar option titles and links, allowing for a more intuitive and customized navigation experience within your WordPress environment.
+= Why Admin Bar Editor is different =
 
-7. **Change Admin Bar Logo**: Replace the default WordPress logo on the admin bar with your custom logo. Showcase your brand or add a personal touch to the dashboard.
+* Focuses specifically on **toolbar usability** instead of being a general admin theme.
+* Uses a **simple, visual layout** with toggles and drag-handles so non-technical users can edit the bar safely.
+* Built with **role-based workflows** in mind, so administrators can create different toolbar experiences for different user types (with Pro).
+* Designed to be **lightweight and compatible** with modern WordPress sites, including popular themes and plugins.
 
-8. **Drag-and-Drop Reordering**: Reorder the position of Admin Bar items with an intuitive drag-and-drop interface, enabling you to prioritize the options according to your workflow.
+== Free Features ==
 
-9. **Addition of New Items**: Expand the Admin Bar's functionality by adding new items, providing quick access to your most-used pages, tools, or external resources.
+The free version includes everything you need to clean up and simplify the WordPress admin bar.
 
-10. **Sub-Item Integration**: Integrate sub-items under existing options, organizing your Admin Bar into a more efficient and user-friendly hierarchy.
+**Backend toolbar control**
 
-11. **Drag-and-Drop Reordering**: Reorder the position of Admin Bar items with an intuitive drag-and-drop interface, enabling you to prioritize the options according to your workflow.
+* Enable/disable core admin bar items such as:
+  * WordPress logo menu
+  * Site name / visit site
+  * Updates
+  * Comments
+  * “New” content menu and its default sub-items (Post, Media, Page, User)
+* Toggle each item with an easy on/off switch - no code editing.
+* Use drag-and-drop handles to reorder items in the backend admin bar.
+* Expand items to manage visibility of built-in submenu entries like Post, Media, Page, and User.
 
-12. **Responsive Design**: The admin bar customization seamlessly adapts to different screen sizes, ensuring a consistent experience across desktops, tablets, and mobile devices.
+**Frontend toolbar control**
 
-13. **Easy to Use Interface**: The plugin offers an intuitive and user-friendly interface for customization, making it accessible to users of all skill levels. No coding knowledge is required to personalize your admin bar.
+* Disable or enable the **frontend admin bar** globally with a single switch.
+* Hide or show the toolbar for all logged-in users on the frontend.
+* Hide or show the toolbar for all guest (non-logged-in) users where applicable.
+* Manage visibility of core frontend admin bar items with switches and drag-and-drop ordering.
 
-== Advanced Customization Features ==
+**Basic admin bar layout**
 
-**Admin Bar Position Control**: Easily move the admin bar position from top to bottom.
+* Move the admin bar **position** from the top of the screen to the bottom (global option).
+* Apply the position change consistently for both backend and frontend views.
 
-**Frontend Toolbar Management**: Complete control over the WordPress toolbar on your site's frontend.
+**Safe defaults and compatibility**
 
-**Custom Menu Structure**: Add toolbar menu items and create nested dropdown menus. Create up to 3 child menus per item. Add custom links, icons and also implement role based accessibility for all menus and sub menus.
+* Uses native WordPress toolbar APIs to avoid touching core files.
+* Works with any theme and most plugins that add their own admin bar items.
+* Stores settings in the database so your configuration persists through updates and re-activations.
 
-**Advanced Styling Options (PRO)**:
+== Pro Features ==
 
-- Transform your admin bar with custom background colors and gradients
-- Personalize text colors and hover effects
-- Style dropdown menus to match your brand
-- Customize the "New" button appearance
+Upgrade to Pro when you need finer control over **who** sees the admin bar, plus advanced styling and custom menus.
 
-**Role-Based Access Control**
+**Custom admin bar menus (Pro)**
 
-- Hide admin bar for specific users or entire user roles
-- Manage admin bar permissions with precision
-- Create custom toolbar views for different user types
-- Control admin bar access across your entire WordPress site
+* Add **new top-level items** to the admin bar with custom titles and URLs.
+* Add **custom submenu items** under existing or new menu entries.
+* Build role-aware shortcuts to dashboards, docs, tools, or external services for your team or clients.
 
-== Technical Features ==
+**Role- and user-based toolbar visibility (Pro)**
 
-- Seamless integration with WordPress core toolbar functionality
-- Compatible with all major WordPress themes and plugins
-- Optimized for performance with minimal impact on page load times
-- Regular updates to ensure compatibility with the latest WordPress versions
+* Disable the frontend admin bar **for specific user roles** while keeping it visible for others.
+* Disable the frontend admin bar **for specific usernames** when you need per-user control.
+* Combine global, role, and user rules to design clean toolbars for each audience.
 
-== Use Cases ==
+**Advanced styling: background, text, dropdowns, button (Pro)**
 
-**For Developers**: Streamline the admin toolbar for client websites
-**For Agencies**: Maintain brand consistency across multiple WordPress installations
-**For Multi-User Sites**: Configure different toolbar layouts for various user roles
-**For Site Owners**: Simplify the WordPress admin experience for your team
+The **Advanced → Styles** tab unlocks visual customization for the toolbar.
 
-== Plugin Highlights ==
+* Set a **custom background color** for the admin bar.
+* Use a **gradient background** to match your brand.
+* Customize **text color** across the toolbar.
+* Style the **dropdown appearance** for menu groups.
+* Change the **“New” button** style and color for better visual hierarchy.
 
-- Edit admin bar items without coding
-- Customize WordPress toolbar appearance
-- Manage admin toolbar access efficiently
-- Create intuitive navigation structures
-- Control frontend admin bar display
-- Move admin bar position (top/bottom) with one click
-- Style admin bar colors and gradients (PRO)
-- Hide admin bar for specific user roles
-- Add custom links to admin toolbar dropdowns
-- Organize menu items with drag-and-drop simplicity
-- Create multi-level submenu structures
-- Set custom icons for toolbar items
-- Control admin bar visibility per page or site-wide
-- Manage frontend toolbar permissions
-- Customize admin bar text and background colors
-- Remove or disable specific admin bar elements
-- Add new menu items to WordPress toolbar
-- Configure admin bar access by user role
-- Style dropdown menus to match your theme
-- Replace default WordPress admin bar logo
-- Create role-specific toolbar layouts
-- Adapt admin bar for mobile devices
-- Set conditional toolbar visibility rules
-- Manage secondary toolbar menu items (PRO)
+These options help agencies and brand-focused sites keep the toolbar consistent with their design system.
 
+[**Upgrade to Admin Bar Editor Pro →**](https://jeweltheme.com/admin-bar-editor?utm_source=wordpressorg&utm_medium=readme&utm_campaign=admin-bar) for advanced role control, custom menus, and full toolbar styling. 
 
 == 🙌 Support ==
+
 For any questions, get in touch with us via our [Contact Page](https://wordpress.org/support/plugin/admin-bar/#new-topic-0)
 
 == Screenshots ==
@@ -130,44 +131,101 @@ For any questions, get in touch with us via our [Contact Page](https://wordpress
 7. Add Custom Menu or links in the Admin Bar or Toolbar
 
 == Installation ==
-1. Upload the 'adminbar-editor' folder to the '/wp-content/plugins/' directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Navigate to 'Settings > AdminBar Editor' to configure your Admin Bar options.
+
+= Automatic installation (recommended) =
+
+1. Log in to your WordPress dashboard.
+2. Go to **Plugins → Add New**.
+3. Search for **“Admin Bar Editor”**.
+4. Install the plugin developed by **Jewel Theme**.
+5. Click **Activate**.
+
+= Manual installation =
+
+1. Download the `admin-bar` plugin ZIP from WordPress.org.
+2. In your dashboard, go to **Plugins → Add New → Upload Plugin**.
+3. Upload the ZIP file and click **Install Now**.
+4. After installation, click **Activate Plugin**.
+
+= Getting started =
+
+1. In your dashboard, go to **Settings → AdminBar Editor** (or the **Adminbar Editor** menu item).
+2. Choose **Backend** or **Frontend** to start editing the corresponding admin bar.
+3. Use drag-and-drop and toggles to hide, show, and reorder toolbar items.
+4. Open the **Advanced** tab to change the admin bar position and, in Pro, adjust colors and styles.
+5. Click **Save Settings** when you are done.
+
+== How It Works ==
+
+Admin Bar Editor hooks into WordPress’s built-in toolbar system and lets you manage items through an options panel instead of code.
+
+* When you toggle or reorder an item, the plugin records that layout in the database and applies it each time the admin bar is rendered.
+* Free users can control existing toolbar items and the global frontend bar, while Pro users unlock custom menu entries, per-role visibility, and advanced styling.
+* Deactivating the plugin restores the default WordPress admin bar; reactivating brings back your saved configuration.
 
 == Frequently Asked Questions ==
 
-= Can I revert to the default settings? =
+== Frequently Asked Questions ==
 
-Yes, you can easily revert to the default admin bar settings by deactivating the plugin.
+= Can I hide the WordPress admin bar on the frontend? =
 
-= Is it compatible with all WordPress themes? =
+Yes. You can globally disable the frontend admin bar, or keep it visible and control which items appear.
 
-Admin Bar Customizer is designed to be compatible with most WordPress themes. However, in rare cases, some themes may have conflicting styles or customizations that could affect the appearance of the admin bar.
+= Can I hide the admin bar only for certain users or roles? =
 
-= Can I customize the admin bar for specific user roles? =
+Yes, this is available in **Pro**. You can hide the frontend admin bar for specific user roles or for individual usernames while leaving it enabled for others.
 
-Yes, the plugin allows you to customize the admin bar based on user roles. You can define unique settings for administrators, editors, authors, and other user roles.
+= Can I add custom links or menus to the admin bar? =
 
-= How do I customize the admin bar position? =
+Yes, the **Pro** version allows you to add new menu items and submenu items with custom URLs, making it easy to add shortcuts to admin pages, external tools, or documentation.
 
-You can easily fix the admin bar position to either top or bottom of your screen using the plugin's settings panel.
+= Does Admin Bar Editor change core WordPress files? =
 
-= Can I style the WordPress toolbar differently for backend and frontend? =
+No. The plugin uses standard WordPress hooks and filters to modify the admin bar and does not edit core files. Deactivating the plugin returns the toolbar to its default state.
 
-Yes, the plugin allows separate customization of the admin bar for both backend and frontend interfaces.
+= Will this plugin slow down my site? =
 
-= Is it possible to add custom links to the admin toolbar? =
+Admin Bar Editor is lightweight and only affects the toolbar markup for logged-in users. It has minimal impact on page load and does not modify front-end content for visitors.
 
-Absolutely! You can add new menu items with custom links to both the main admin bar and its submenus.
+= Is it compatible with my theme and other plugins? =
 
-= How do I manage admin bar permissions for different users? =
+The plugin works with any theme that uses the standard WordPress admin bar. It also supports toolbar items added by most plugins, which you can toggle or reorder from the interface.
 
-The plugin provides comprehensive tools to control admin bar visibility and access based on user roles or individual usernames.
+= Can I style the admin bar differently on backend and frontend? =
 
-Need help customizing your WordPress toolbar? Visit our support forum for assistance with the Admin Bar Editor plugin.
+You can manage backend and frontend toolbars in separate tabs. Position and Pro styling options apply consistently, but you can enable or disable items independently for backend and frontend.
 
+= What happens to my settings if I update or deactivate the plugin? =
+
+Your configuration is stored in the database and kept during updates. If you deactivate the plugin, the default admin bar returns; when you reactivate it, your saved layout and options are restored.
+
+= How do I upgrade to Pro? =
+
+Purchase a Pro license from the Admin Bar Editor product page, download the Pro plugin, and install it alongside the free version. Then activate your license to unlock Pro features.
+
+= Where can I get support? =
+
+You can use the **WordPress.org support forum** for the free plugin or contact the Jewel Theme team from the plugin’s documentation and support links.
 
 == Changelog ==
+= 1.1.4 (02-02-2026) =
+* Performance: Optimized Users & Roles database queries for enhanced performance and faster loading times.
+* Fixed: Custom Icons style issue fixed.
+
+= 1.1.3 (27-01-2026) =
+* Fixed: LiteSpeed Cache plugin options not updated issue fixed.
+* Added: Save Settings button loading text added.
+
+= 1.1.2.2 (22-12-2025) =
+* Fixed: Hidden for roles not showing issue fixed.
+* Fixed: Settings Panel broken loader image issue fixed.
+
+= 1.1.2.1 (21-12-2025) =
+* Fixed: Admin Bar Menu hiding issue fixed.
+* Fixed: text-domain issue fixed.
+* Fixed: Adminify plugin register admin menu issue fixed.
+* UI Improve: Allow separate role-based and user-based visibility controls in multi-select groups.
+
 = 1.1.2.0 (04-09-2025) =
 * Fixed: Logout url redirecting to confirmation page issue.
 * Fixed: Admin bar caching url for third party plugins menu item.
@@ -209,24 +267,7 @@ Need help customizing your WordPress toolbar? Visit our support forum for assist
 * Fixed: Hidden For Admin Bar Item Compatibility with WP Adminify
 * Fixed: Option Page not showing Compatibility with WP Adminify
 
-= 1.0.2.8 (7-9-2024) =
-* Updated: UI Improvements
-
-= 1.0.2.7 (31-08-2024) =
-* Fixed: CSS issue fix
-* Fixed: Pre-loader image issue
-
-= 1.0.2.6 (29-08-2024) =
-* Updated: Added Advanced Tab for managing CSS for Admin bar
-* Updated: Compatibility with WP Adminify
-* Fixed: Active tab issue fixed
-* Added: Data Migration add with WP Adminify
-
-= 1.0.2.5 (08-05-2024) =
-* Updated: Console log DOM error issue fixed
-* Updated: Frontend Assets update
-* Updated: Display name issue fixed
-
 Details [changelog here](https://jeweltheme.com/docs/admin-bar-editor/changelogs)
 
 == Upgrade Notice ==
+

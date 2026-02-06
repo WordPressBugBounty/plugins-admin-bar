@@ -43,7 +43,7 @@ if ( ! class_exists( 'Upgrader' ) ) {
 		 * @return string
 		 */
 		protected function get_installed_version() {
-			return get_option( $this->option_name, JLT_ADMIN_BAR_EDITOR_VER );
+			return get_option( $this->option_name, '1.0.0' );
 		}
 
 		/**

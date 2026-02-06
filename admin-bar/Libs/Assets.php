@@ -67,6 +67,7 @@ if ( ! class_exists( 'Assets' ) ) {
 						'images'            => JLT_ADMIN_BAR_EDITOR_IMAGES,
 						'is_premium'        => jlt_admin_bar_editor_is_premium(),
 						'is_agency'         => jlt_admin_bar_editor_is_plan( 'agency' ),
+						'user_roles'				=> $this->jlt_admin_bar_get_user_roles()
 					)
 				);
 			}
@@ -74,6 +75,51 @@ if ( ! class_exists( 'Assets' ) ) {
 			wp_enqueue_style('jlt-admin-bar-sdk', JLT_ADMIN_BAR_EDITOR_ASSETS . 'css/admin-bar-sdk.min.css', array('dashicons'), JLT_ADMIN_BAR_EDITOR_VER, 'all');
 
 
+		}
+
+		/**
+		 * Get User Roles and first 3 users
+		 * @return array
+		 */
+		public function jlt_admin_bar_get_user_roles() {
+   		global $wp_roles;
+			$roles = $wp_roles->roles;
+
+			$new_roles_array = array();
+
+			if (is_multisite()) {
+				$new_roles_array[] = [
+					'value' => 'super_admin',
+					'label' => 'Super Admin',
+				];
+			}
+
+			foreach ($roles as $key => $role) {
+				$new_roles_array[] = [
+					'value' => $key,
+					'label'  => $role['name'],
+				];
+			}
+
+			// Get first 3 users
+			$users_array = array();
+			$users = get_users(array(
+				'number' => 3,
+				'orderby' => 'display_name',
+				'order' => 'ASC',
+			));
+
+			foreach ($users as $user) {
+				$users_array[] = [
+					'value' => $user->user_login,
+					'label' => $user->display_name,
+				];
+			}
+
+			return [
+				'roles' => $new_roles_array,
+				'users' => $users_array,
+			];
 		}
 	}
 }

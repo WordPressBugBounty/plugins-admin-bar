@@ -212,8 +212,6 @@ if (!class_exists('Core')) {
 
             $admin_bar_items                           = (new AdminBarEditorOptions())->get();
 
-            $user_roles                                = $this->get_users_list();
-
             $admin_bars['existing_admin_bar']          = $this->nodes_to_array($wp_admin_bar->get_nodes(), 'backend');
 
             if (is_admin()) {
@@ -224,7 +222,6 @@ if (!class_exists('Core')) {
 
             // $admin_bars['existing_admin_bar_frontend'] = $this->nodes_to_array($frontend_items, 'frontend');
             $admin_bars['existing_admin_bar_frontend'] = $this->nodes_to_array($wp_admin_bar->get_nodes(), 'frontend');
-            $admin_bars['user_roles']                  = $user_roles;
             
             // Admin Bar Styles
             $admin_bars['admin_bar_settings']       = !empty( $admin_bar_items['admin_bar_settings'] ) ? $admin_bar_items['admin_bar_settings'] : [];
@@ -468,10 +465,6 @@ if (!class_exists('Core')) {
         {
             global $wp_admin_bar;
 
-            $nodes = array();
-
-            $user  = wp_get_current_user();
-            $roles = $user->roles;
             if( in_array('my-account', array_keys($parsed_menu))){
                 $account_items = $parsed_menu['my-account'];
                 unset($parsed_menu['my-account']);
@@ -589,8 +582,8 @@ if (!class_exists('Core')) {
 
                         if (str_contains($menu['icon'], '/adminify-custom-icons/')) {
                             $args['title'] = '
-                                <div class="ab-item jlt-admin-bar-menu">
-                                    <img style="width:20px;position: relative;" src="' . $menu['icon'] . '"/>
+                                <div class="ab-item jlt-admin-bar-menu jlt-admin-bar-menu-image">
+                                    <img width="20" height="20" style="width:20px;position: relative;" src="' . $menu['icon'] . '"/>
                                     ' . $label . '
                                 </div>
                             ';
@@ -631,11 +624,10 @@ if (!class_exists('Core')) {
             }
 
             $current_user = wp_get_current_user();
-            $current_name = $current_user->display_name;
+            $current_login = $current_user->user_login;
             $current_roles = $current_user->roles;
-            $all_roles = wp_roles()->get_names();
 
-            if (in_array($current_name, $disabled_for)) {
+            if (in_array($current_login, $disabled_for)) {
                 return true;
             }
 
@@ -649,38 +641,16 @@ if (!class_exists('Core')) {
                 }
             }
 
-            $disabled_for = array_map(function ($value) {
-                return strtolower(str_replace(' ', '_', $value));
-            }, $disabled_for);
+            // $disabled_for = array_map(function ($value) {
+            //     // 'rolemaster_' .
+            //     return strtolower(str_replace(' ', '_', $value));
+            // }, $disabled_for);
 
             foreach ($current_roles as $role) {
                 if (in_array($role, $disabled_for)) {
                     return true;
                 }
             }
-        }
-
-        public function get_users_list()
-        {
-            global $wp_roles;
-            $users = get_users();
-            $roles = $wp_roles->roles;
-
-            $new_roles_array = array();
-
-            if (is_multisite()) {
-                $new_roles_array[] = 'Super Admin';
-            }
-
-            foreach ($roles as $role) {
-                $new_roles_array[] = $role['name'];
-            }
-
-            foreach ($users as $user) {
-                $new_roles_array[] = $user->display_name;
-            }
-
-            return $new_roles_array;
         }
 
         /**

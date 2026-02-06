@@ -1,4 +1,22 @@
 == Changelog ==
+= 1.1.4 (02-02-2026) =
+* Performance: Optimized Users & Roles database queries for enhanced performance and faster loading times.
+* Fixed: Custom Icons style issue fixed.
+
+= 1.1.3 (27-01-2026) =
+* Fixed: LiteSpeed Cache plugin options not updated issue fixed.
+* Added: Save Settings button loading text added.
+
+= 1.1.2.2 (22-12-2025) =
+* Fixed: Hidden for roles not showing issue fixed.
+* Fixed: Settings Panel broken loader image issue fixed.
+
+= 1.1.2.1 (21-12-2025) =
+* Fixed: Admin Bar Menu hiding issue fixed.
+* Fixed: text-domain issue fixed.
+* Fixed: Adminify plugin register admin menu issue fixed.
+* UI Improve: Allow separate role-based and user-based visibility controls in multi-select groups.
+
 = 1.1.2.0 (04-09-2025) =
 * Fixed: Logout url redirecting to confirmation page issue.
 * Fixed: Admin bar caching url for third party plugins menu item.

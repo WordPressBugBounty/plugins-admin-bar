@@ -18,6 +18,28 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
             $this->sync_settings_from_adminify();
         }
         add_action('rest_api_init', [$this, 'add_endpoints']);
+        add_filter('rest_pre_dispatch', [$this, 'disable_rest_cache'], 10, 3);
+    }
+
+    /**
+     * Disable caching for this plugin's REST API routes.
+     * Supports LiteSpeed Cache and other cache plugins via DONOTCACHEPAGE.
+     */
+    public function disable_rest_cache($result, $server, $request)
+    {
+        $route = $request->get_route();
+
+        if (strpos($route, '/' . $this->namespace) === 0) {
+            // LiteSpeed Cache: mark as non-cacheable
+            do_action('litespeed_control_set_nocache', 'Admin Bar Editor REST API');
+
+            // Universal: prevent page caching for other cache plugins
+            if (!defined('DONOTCACHEPAGE')) {
+                define('DONOTCACHEPAGE', true);
+            }
+        }
+
+        return $result;
     }
 
     // Sync Data form Adminify
@@ -135,6 +157,29 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
                 'permission_callback' =>  [$this, 'check_permission']
             ]
         );
+
+        register_rest_route(
+            $this->api_namespace(),
+            '/search-users/',
+            [
+                'methods'             => \WP_REST_Server::READABLE,
+                'callback'            =>  [$this, 'search_users'],
+                'permission_callback' =>  [$this, 'check_permission'],
+                'args'                => [
+                    'search' => [
+                        'required'          => false,
+                        'type'              => 'string',
+                        'sanitize_callback' => 'sanitize_text_field',
+                    ],
+                    'limit' => [
+                        'required'          => false,
+                        'type'              => 'integer',
+                        'default'           => 3,
+                        'sanitize_callback' => 'absint',
+                    ],
+                ],
+            ]
+        );
     }
 
     /**
@@ -161,27 +206,16 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
         $nested_front_bar                 = Core::format_to_nested($parsed_admin_bar_frontend);
         $formated_front_menu              = Core::associative_to_index_array($nested_front_bar);
 
-        $user_roles                       = !empty($admin_bar_items['user_roles']) ? $admin_bar_items['user_roles'] : [];
-
-        $user_roles_array = array();
-
-        if(!is_multisite() && isset($user_roles[0]) && $user_roles[0] == 'Super Admin'){
-            unset($user_roles[0]); // Rmove Super Admin role
-        }
-
-        $user_roles_array = array_merge($user_roles_array, $user_roles);
-
         return [
             'is_pro_user'                   => jlt_admin_bar_editor_is_premium(),
             'upgrade_pro_notice'            => Utils::jlt_admin_bar_upgrade_pro(),
             'admin_bar_backend'             => $formated_admin_menu,
             'admin_bar_frontend'            => $formated_front_menu,
             'custom_icons'                  => $custom_icons,
-            'user_roles'                    => $user_roles_array,
-            'disable_backend_admin_bar'     => $admin_bar_items['disable_backend_admin_bar'],
-            'disable_backend_conditions'    => $admin_bar_items['disable_backend_conditions'],
-            'disable_frontend_admin_bar'    => $admin_bar_items['disable_frontend_admin_bar'],
-            'disable_frontend_conditions'   => $admin_bar_items['disable_frontend_conditions'],
+            'disable_backend_admin_bar'     => !empty($admin_bar_items['disable_backend_admin_bar']) ? $admin_bar_items['disable_backend_admin_bar'] : false,
+            'disable_backend_conditions'    => !empty($admin_bar_items['disable_backend_conditions']) ? $admin_bar_items['disable_backend_conditions'] : [],
+            'disable_frontend_admin_bar'    => !empty($admin_bar_items['disable_frontend_admin_bar']) ? $admin_bar_items['disable_frontend_admin_bar'] : false,
+            'disable_frontend_conditions'   => !empty($admin_bar_items['disable_frontend_conditions']) ? $admin_bar_items['disable_frontend_conditions'] : [],
             'disable_frontend_all_users'    => !empty( $admin_bar_items['disable_frontend_all_users'] ) ? $admin_bar_items['disable_frontend_all_users'] : false,
             'disable_frontend_guest_users'  => !empty( $admin_bar_items['disable_frontend_guest_users'] ) ? $admin_bar_items['disable_frontend_guest_users'] : false,
             // 'admin_bar' => $admin_bar_items
@@ -457,6 +491,42 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
         }
 
         return $menu_items;
+    }
+
+    /**
+     * Search users for Hidden For Rules dropdown
+     * Only returns users when search query is 3+ characters
+     */
+    public function search_users($request)
+    {
+        $search = $request->get_param('search');
+        $limit = $request->get_param('limit') ?: 5;
+
+        $result = [
+            'users' => [],
+        ];
+
+        // Only search when query is 3+ characters
+        if (!empty($search) && strlen($search) >= 3) {
+            $user_args = [
+                'orderby' => 'display_name',
+                'order'   => 'ASC',
+                'number'  => $limit,
+                'search'  => '*' . $search . '*',
+                'search_columns' => ['display_name', 'user_login', 'user_email'],
+            ];
+
+            $users = get_users($user_args);
+
+            foreach ($users as $user) {
+                $result['users'][] = [
+                    'value' => $user->user_login,
+                    'label' => $user->display_name,
+                ];
+            }
+        }
+
+        return rest_ensure_response($result);
     }
 
     /**
