@@ -178,92 +178,79 @@ if (!class_exists('Core')) {
             return $frontend_items;
         }
 
-        public function get_admin_bar_menu_list()
-        {
-            global $wp_admin_bar;
+	public function get_admin_bar_menu_list() {
+        if( !current_user_can('manage_options') ) return;
+        
+		global $wp_admin_bar;
 
-            $syned = false;
-            if( is_admin()){
-                $previous_admin_bar = get_option('previous_admin_bar_backend');
-                update_option('previous_admin_bar_backend', $wp_admin_bar);
-            }else{
-                $previous_admin_bar = get_option('previous_admin_bar_frontend');
-                update_option('previous_admin_bar_frontend', $wp_admin_bar);
-            }
-            if($previous_admin_bar  === $wp_admin_bar){
-                $syned = true;
-                update_option($this->prefix . '_is_synced', true);
-            }else{
-                update_option($this->prefix . '_is_synced', false);
-            }
-            
-            $this->current_admin_bar_nodes = $wp_admin_bar->get_nodes();
-            // if (is_admin()) {
-            //     $wp_admin_bar->remove_menu('menu-toggle');
-            //     $wp_admin_bar->remove_menu('wp-logo');
-            //     $wp_admin_bar->remove_menu('site-name');
-            //     $wp_admin_bar->remove_menu('updates');
-            //     $wp_admin_bar->remove_menu('comments');
-            //     $wp_admin_bar->remove_menu('my-account');
-            // }
+		if ( ! is_object( $wp_admin_bar ) ) {
+			return;
+		}
 
-            // $frontend_items = $this->get_frontend_items();
-            // if ($frontend_items === false) return;
+		// Get current options
+		$admin_bar_items = ( new AdminBarEditorOptions() )->get();
 
-            $admin_bar_items                           = (new AdminBarEditorOptions())->get();
+		// Initialize arrays if they don't exist
+		if ( ! isset( $admin_bar_items['existing_admin_bar'] ) ) {
+			$admin_bar_items['existing_admin_bar'] = [];
+		}
+		if ( ! isset( $admin_bar_items['existing_admin_bar_frontend'] ) ) {
+			$admin_bar_items['existing_admin_bar_frontend'] = [];
+		}
 
-            $admin_bars['existing_admin_bar']          = $this->nodes_to_array($wp_admin_bar->get_nodes(), 'backend');
+		// CAPTURE DATA BASED ON CONTEXT
+		if ( is_admin() ) {
+			// We are in Backend - Capture Backend Nodes
+			$current_nodes = $wp_admin_bar->get_nodes();
+			if ( $current_nodes ) {
+				$nav_items                              = $this->nodes_to_array( $current_nodes, 'backend' );
+				$existing_structure                     = self::format_to_nested( $nav_items );
+				$existing_structure                     = self::clean_array( $existing_structure );
+				$admin_bar_items['existing_admin_bar']  = self::assoc_to_flat_array( $existing_structure );
+			}
+		} else {
+			// We are in Frontend - Capture Frontend Nodes
+			$current_nodes = $wp_admin_bar->get_nodes();
+			if ( $current_nodes ) {
+				$admin_bar_items['existing_admin_bar_frontend'] = $this->nodes_to_array( $current_nodes, 'frontend' );
+			}
+		}
 
-            if (is_admin()) {
-                $existing_admin_bar                        = self::format_to_nested($admin_bars['existing_admin_bar']);
-                $existing_admin_bar                        = self::clean_array($existing_admin_bar);
-                $admin_bars['existing_admin_bar']          = self::assoc_to_flat_array($existing_admin_bar);
-            }
+		// Preserve User Settings (Saved Data)
+		// Ensure we don't overwrite saved_admin_bar with empty arrays if they exist
+		if ( ! isset( $admin_bar_items['saved_admin_bar'] ) ) {
+			$admin_bar_items['saved_admin_bar'] = [];
+		}
+		if ( ! isset( $admin_bar_items['saved_admin_bar_frontend'] ) ) {
+			$admin_bar_items['saved_admin_bar_frontend'] = [];
+		}
 
-            // $admin_bars['existing_admin_bar_frontend'] = $this->nodes_to_array($frontend_items, 'frontend');
-            $admin_bars['existing_admin_bar_frontend'] = $this->nodes_to_array($wp_admin_bar->get_nodes(), 'frontend');
-            
-            // Admin Bar Styles
-            $admin_bars['admin_bar_settings']       = !empty( $admin_bar_items['admin_bar_settings'] ) ? $admin_bar_items['admin_bar_settings'] : [];
+		// Default Settings
+		if ( ! isset( $admin_bar_items['admin_bar_settings'] ) ) {
+			$admin_bar_items['admin_bar_settings'] = [];
+		}
 
+		$admin_bar_items['disable_backend_admin_bar']   = isset( $admin_bar_items['disable_backend_admin_bar'] ) ? $admin_bar_items['disable_backend_admin_bar'] : 0;
+		$admin_bar_items['disable_backend_conditions']  = isset( $admin_bar_items['disable_backend_conditions'] ) ? $admin_bar_items['disable_backend_conditions'] : array();
+		$admin_bar_items['disable_frontend_admin_bar']  = isset( $admin_bar_items['disable_frontend_admin_bar'] ) ? $admin_bar_items['disable_frontend_admin_bar'] : 0;
+		$admin_bar_items['disable_frontend_conditions'] = isset( $admin_bar_items['disable_frontend_conditions'] ) ? $admin_bar_items['disable_frontend_conditions'] : array();
 
-            // Add disable adminbar keys
-            $admin_bars['disable_backend_admin_bar'] = isset($admin_bar_items['disable_backend_admin_bar']) ? $admin_bar_items['disable_backend_admin_bar'] : 0;
-            $admin_bars['disable_backend_conditions'] = isset($admin_bar_items['disable_backend_conditions']) ? $admin_bar_items['disable_backend_conditions'] : array();
+		// Save the updated "Existing" items to the database
+		// This ensures that when we visit the settings page, we have the latest items from each environment
+		update_option( $this->prefix, $admin_bar_items );
 
-            $admin_bars['disable_frontend_admin_bar'] = isset($admin_bar_items['disable_frontend_admin_bar']) ? $admin_bar_items['disable_frontend_admin_bar'] : 0;
-            $admin_bars['disable_frontend_conditions'] = isset($admin_bar_items['disable_frontend_conditions']) ? $admin_bar_items['disable_frontend_conditions'] : array();
-
-            // If new menu item added or removed by theme/plugin activation/deactivation
-            if (!array_key_exists('existing_admin_bar', $admin_bar_items) || (array_keys($admin_bar_items['existing_admin_bar']) !== array_keys($admin_bars['existing_admin_bar']))) {
-
-                $admin_bars['saved_admin_bar']          = !empty($admin_bar_items['saved_admin_bar']) ? $admin_bar_items['saved_admin_bar'] : [];
-
-                $admin_bars['saved_admin_bar_frontend'] = !empty($admin_bar_items['saved_admin_bar_frontend']) ? $admin_bar_items['saved_admin_bar_frontend'] : [];
-                update_option($this->prefix, $admin_bars);
-            }
-
-
-            $adminbar_remover_key_exists = (get_option('show-ab', null) !== null);
-            if( $adminbar_remover_key_exists ){
-
-                // Already Synceed? Bail Early
-                if (get_option($this->prefix . '_is_synced', false)) return;
-
-                // Settings Class
-                $admin_bar_prev_option = empty( get_option('show-ab') ) ? true : false;
-
-                // Update New Options
-                $admin_bars['disable_frontend_admin_bar'] = $admin_bar_prev_option;
-
-                // Save The Settings
-                update_option($this->prefix, $admin_bars);
-
-                // Operation Done
-                update_option($this->prefix . '_is_synced', true);
-            }
-
-        }
+		// Legacy: Admin Bar Remover Sync (kept but minimized impact)
+		$adminbar_remover_key_exists = ( get_option( 'show-ab', null ) !== null );
+		if ( $adminbar_remover_key_exists ) {
+			if ( get_option( $this->prefix . '_is_synced', false ) ) {
+				return;
+			}
+			$admin_bar_prev_option = empty( get_option( 'show-ab' ) ) ? true : false;
+			$admin_bar_items['disable_frontend_admin_bar'] = $admin_bar_prev_option;
+			update_option( $this->prefix, $admin_bar_items );
+			update_option( $this->prefix . '_is_synced', true );
+		}
+	}
 
         public static function clean_array($array)
         {
@@ -439,6 +426,27 @@ if (!class_exists('Core')) {
                 $saved_admin_bar_frontend    = !empty($admin_bar_items['saved_admin_bar_frontend']) ? $admin_bar_items['saved_admin_bar_frontend'] : $existing_admin_bar_frontend;
                 $parsed_menu        = empty($saved_admin_bar_frontend) ? $existing_admin_bar_frontend : self::parse_menu_items($saved_admin_bar_frontend, $existing_admin_bar_frontend, 'frontend');
             }
+            // Filter parsed_menu: only keep items the current user actually has access to.
+            // WordPress already did capability checks when generating $existing_menu,
+            // so we use it as the source of truth for what this user can see.
+            $filtered_menu = [];
+            foreach ($parsed_menu as $item_id => $item) {
+                $is_custom_item = !empty($item['newly_created']) && $item['newly_created'] == 1;
+                $user_has_node  = isset($existing_menu[$item_id]);
+
+                // Keep item if: user has it (WordPress granted access) OR it's a custom item
+                if ($user_has_node || $is_custom_item) {
+                    $filtered_menu[$item_id] = $item;
+                }
+                // Also keep child items whose parent the user has access to
+                if (!$user_has_node && !$is_custom_item && !empty($item['parent'])) {
+                    if (isset($existing_menu[$item['parent']]) || isset($filtered_menu[$item['parent']])) {
+                        $filtered_menu[$item_id] = $item;
+                    }
+                }
+            }
+            $parsed_menu = $filtered_menu;
+
             // Remove all nodes.
             foreach ($existing_menu as $node_id => $node) {
                 if( array_key_exists($node->id, $parsed_menu ) ){
@@ -474,36 +482,37 @@ if (!class_exists('Core')) {
             foreach ($parsed_menu as $menu_id => $menu) {
                 
                 
-                // if existing title_default then title_default
-                // if not existing saved_title_default then saved_title_default
-                $howdy_title = '';
-                $custom_howdy_title = 0;
-                if( is_admin()){
-                    if( !empty($this->admin_bar_options['saved_admin_bar']['my-account']['title'] ) ){
-                        $howdy_title = $this->admin_bar_options['saved_admin_bar']['my-account']['title'];
-                    } elseif( !empty($this->admin_bar_options['existing_admin_bar']['my-account']['title_default'] ) ){
-                        $howdy_title = $this->admin_bar_options['existing_admin_bar']['my-account']['title_default'];
-                    }
-                }else{
-                    if( !empty($this->admin_bar_options['saved_admin_bar_frontend']['my-account']['title'] ) ){
-                        $howdy_title = $this->admin_bar_options['saved_admin_bar_frontend']['my-account']['title'];
-                    } elseif( !empty($this->admin_bar_options['existing_admin_bar_frontend']['my-account']['title_default'] ) ){
-                        $howdy_title = $this->admin_bar_options['existing_admin_bar_frontend']['my-account']['title_default'];
-                    }
-                }
-                if (strpos($howdy_title, '<span class="display-name"') !== false) {
-                    $custom_howdy_title = 1;
-                }
-
                 if( $menu_id === 'my-account' ){
                     $current_user  = wp_get_current_user();
                     $user_id       = get_current_user_id();
-                    $avatar        = get_avatar($user_id, 26);     // size 26x26 pixels
+                    $avatar        = get_avatar($user_id, 26);
                     $display_name  = $current_user->display_name;
-                    if($custom_howdy_title){
-                        $menu['title'] = $howdy_title; 
-                    }else{
-                        $menu['title'] = $howdy_title . ' ' . $display_name . $avatar; 
+
+                    // Check if admin explicitly set a custom title (not the auto-captured title_default)
+                    $custom_title = '';
+                    if( is_admin()){
+                        if( !empty($this->admin_bar_options['saved_admin_bar']['my-account']['title'] ) ){
+                            $custom_title = $this->admin_bar_options['saved_admin_bar']['my-account']['title'];
+                        }
+                    } else {
+                        if( !empty($this->admin_bar_options['saved_admin_bar_frontend']['my-account']['title'] ) ){
+                            $custom_title = $this->admin_bar_options['saved_admin_bar_frontend']['my-account']['title'];
+                        }
+                    }
+
+                    if (!empty($custom_title)) {
+                        // Admin explicitly set a custom greeting
+                        if (strpos($custom_title, '<span class="display-name"') !== false) {
+                            $menu['title'] = $custom_title;
+                        } else {
+                            $menu['title'] = $custom_title . ' ' . $display_name . $avatar;
+                        }
+                    } elseif (isset($this->original_nodes['my-account'])) {
+                        // Use WordPress's live-rendered title for the current user
+                        $menu['title'] = $this->original_nodes['my-account']->title;
+                    } else {
+                        // Fallback
+                        $menu['title'] = 'Howdy, ' . $display_name . $avatar;
                     }
                 }
                 if($menu_id === 'user-info') {

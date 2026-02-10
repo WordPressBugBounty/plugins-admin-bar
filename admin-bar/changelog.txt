@@ -1,4 +1,8 @@
 == Changelog ==
+= 1.1.5 (10-02-2026) =
+* Fixed: Admin Bar items Frontend & Backed mismatch issue fixed.
+* Fixed: Frontend Admin Bar Session wise username text show issue fixed.
+
 = 1.1.4 (02-02-2026) =
 * Performance: Optimized Users & Roles database queries for enhanced performance and faster loading times.
 * Fixed: Custom Icons style issue fixed.

@@ -4,7 +4,7 @@ Donate link: https://www.buymeacoffee.com/jeweltheme
 Tags: admin bar, hide admin bar, admin bar position, toolbar, customization
 Requires at least: 4.0
 Tested up to: 6.9
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -208,6 +208,10 @@ Purchase a Pro license from the Admin Bar Editor product page, download the Pro 
 You can use the **WordPress.org support forum** for the free plugin or contact the Jewel Theme team from the plugin’s documentation and support links.
 
 == Changelog ==
+= 1.1.5 (10-02-2026) =
+* Fixed: Admin Bar items Frontend & Backed mismatch issue fixed.
+* Fixed: Frontend Admin Bar Session wise username text show issue fixed.
+
 = 1.1.4 (02-02-2026) =
 * Performance: Optimized Users & Roles database queries for enhanced performance and faster loading times.
 * Fixed: Custom Icons style issue fixed.
