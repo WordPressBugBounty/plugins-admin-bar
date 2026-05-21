@@ -1,10 +1,10 @@
 === Admin Bar Editor - Toolbar Customization with User Role based access & Custom menus ===
-Contributors: litonice13, pixarlabs, jwthemeltd
-Donate link: https://www.buymeacoffee.com/jeweltheme
+Contributors: pixarlabs, litonice13 
+Donate link: https://ko-fi.com/litonarefin
 Tags: admin bar, hide admin bar, admin bar position, toolbar, customization
-Requires at least: 4.0
-Tested up to: 6.9
-Stable tag: 1.1.5
+Requires at least: 5.0
+Tested up to: 7.0
+Stable tag: 1.1.6
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -17,6 +17,8 @@ Take full control of your WordPress admin bar: hide items, reorder menus, and de
 
 You can quickly disable the frontend admin bar, turn off specific toolbar items, and reorganize menus with a clean drag-and-drop interface - no code required. This makes the toolbar faster to use for you, your team, and your clients.
 
+[**Admin Bar Editor Pro**](https://jeweltheme.com/admin-bar-editor?utm_source=wordpressorg&utm_medium=readme&utm_campaign=admin-bar) | [**Try Live Demo**](https://demo.pixarlabs.com/?pl-product=admin-bar) | [**Documentation**](https://jeweltheme.com/docs/admin-bar-editor/plugin-installation?utm_source=wordpressorg&utm_medium=readme&utm_campaign=admin-bar) 
+
 = Why customize the WordPress admin bar? =
 
 The default admin bar often gets cluttered with links from themes, plugins, and WordPress core. This can:
@@ -27,7 +29,6 @@ The default admin bar often gets cluttered with links from themes, plugins, and 
 
 Admin Bar Editor gives you precise control over what appears in the toolbar so each role sees a clean, focused experience.
 
-[**Admin Bar Editor Pro**](https://jeweltheme.com/admin-bar-editor?utm_source=wordpressorg&utm_medium=readme&utm_campaign=admin-bar) | [**Try Live Demo**](https://demo.pixarlabs.com/?pl-product=admin-bar) | [**Documentation**](https://jeweltheme.com/docs/admin-bar-editor/plugin-installation?utm_source=wordpressorg&utm_medium=readme&utm_campaign=admin-bar) 
 
 = Who is Admin Bar Editor for? =
 
@@ -207,7 +208,14 @@ Purchase a Pro license from the Admin Bar Editor product page, download the Pro 
 
 You can use the **WordPress.org support forum** for the free plugin or contact the Jewel Theme team from the plugin’s documentation and support links.
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the undefined plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/9e5fbf72-c5af-40b1-9dc6-b85c93dfbbbb). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Changelog ==
+= 1.1.6 (06-05-2026) =
+* Fixed: Recommended menu not showing issue fixed.
+
 = 1.1.5 (10-02-2026) =
 * Fixed: Admin Bar items Frontend & Backed mismatch issue fixed.
 * Fixed: Frontend Admin Bar Session wise username text show issue fixed.

@@ -1,4 +1,7 @@
 == Changelog ==
+= 1.1.6 (06-05-2026) =
+* Fixed: Recommended menu not showing issue fixed.
+
 = 1.1.5 (10-02-2026) =
 * Fixed: Admin Bar items Frontend & Backed mismatch issue fixed.
 * Fixed: Frontend Admin Bar Session wise username text show issue fixed.

@@ -2,11 +2,11 @@
 
 /**
  * Plugin Name: Admin Bar Editor
- * Plugin URI:  https://jeweltheme.com
+ * Plugin URI:  https://jeweltheme.com/admin-bar-editor
  * Description: Hide Admin bar or toolbar based on user role and add custom links, reorder, change WordPress logo & howdy text. Change bar position, background color.
- * Version:     1.1.5
- * Author:      Jewel Theme
- * Author URI:  https://jeweltheme.com/admin-bar-editor
+ * Version:     1.1.6
+ * Author:      Pixar Labs
+ * Author URI:  https://pixarlabs.com
  * Text Domain: admin-bar
  * Domain Path: languages/
  * License:     GPLv3 or later

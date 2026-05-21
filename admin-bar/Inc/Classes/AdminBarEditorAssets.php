@@ -42,8 +42,8 @@ class AdminBarEditorAssets extends AdminBarEditorModel
 
         $admin_bar_settings = $admin_bar_items['admin_bar_settings'];
 
-        if( class_exists('\WPAdminify\Inc\Admin\AdminSettings')){
-            $adminify_options = (array) \WPAdminify\Inc\Admin\AdminSettings::get_instance()->get();
+        if( class_exists('\PXLBSAdminify\Inc\Admin\AdminSettings')){
+            $adminify_options = (array) \PXLBSAdminify\Inc\Admin\AdminSettings::get_instance()->get();
             $this->adminify_ui = $adminify_options['admin_ui'];
         }
 
@@ -282,7 +282,7 @@ class AdminBarEditorAssets extends AdminBarEditorModel
             'uploaded_url'             => wp_upload_dir()['baseurl'],
             'image_path'               => JLT_ADMIN_BAR_EDITOR_IMAGES,
             'nonce'                    => wp_create_nonce( 'wp_rest' ),
-            'adminify_ui' => class_exists('\WPAdminify\Inc\Admin\AdminSettings') ?  \WPAdminify\Inc\Admin\AdminSettings::get_instance()->get()['admin_ui'] : false,
+            'adminify_ui' => class_exists('\PXLBSAdminify\Inc\Admin\AdminSettings') ?  \PXLBSAdminify\Inc\Admin\AdminSettings::get_instance()->get()['admin_ui'] : false,
         );
         wp_localize_script('jlt-admin-bar-admin', 'JltAdminBarEditor', $localize_adminbar_data);
     }
