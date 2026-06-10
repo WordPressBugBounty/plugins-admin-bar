@@ -461,6 +461,16 @@ if (!class_exists('Core')) {
             if (is_array($parsed_menu) && count($parsed_menu) > 0) {
                 $this->generate_nodes($parsed_menu);
             }
+
+            // Restore WordPress's responsive menu-toggle node.
+            // The rebuild above drops it, but core's common.js relies on
+            // #wp-admin-bar-menu-toggle existing to position the left admin-menu
+            // flyouts: adjustSubmenu() only sets the dynamic margin-top when
+            // $('#wp-admin-bar-menu-toggle').is(':hidden') is true, and on a missing
+            // element that test returns false, so the flyout mispositions.
+            if ( ! $wp_admin_bar->get_node('menu-toggle') && isset($existing_menu['menu-toggle']) ) {
+                $wp_admin_bar->add_node( (array) $existing_menu['menu-toggle'] );
+            }
         }
 
 

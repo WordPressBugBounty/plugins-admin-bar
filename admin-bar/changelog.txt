@@ -1,4 +1,11 @@
 == Changelog ==
+= 1.1.7 (10-06-2026) =
+* Fixed: Admin menu (sidebar) submenu flyout mispositioned after customizing admin bar items. Restored WordPress's responsive menu toggle node so submenu margins calculate correctly.
+* Fixed: Admin bar submenu markup now keeps WordPress's original structural classes (left/right placement and group nesting) after editing, so dropdowns position properly.
+* Fixed: PHP "Undefined array key" warnings.
+* Fixed: Hidden iframe style issue.
+* Removed: Recommended plugin support from Features.
+
 = 1.1.6 (06-05-2026) =
 * Fixed: Recommended menu not showing issue fixed.
 

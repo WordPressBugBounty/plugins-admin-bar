@@ -20,7 +20,7 @@ if ( ! class_exists( 'Featured' ) ) {
 		 */
 		public function __construct() {
 			if ( is_admin() ) {
-				add_filter( 'install_plugins_table_api_args_featured', array( $this, 'jlt_admin_bar_editor_featured_plugins_tab' ) );
+				// add_filter( 'install_plugins_table_api_args_featured', array( $this, 'jlt_admin_bar_editor_featured_plugins_tab' ) );
 			}
 		}
 

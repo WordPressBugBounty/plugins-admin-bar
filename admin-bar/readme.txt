@@ -4,7 +4,7 @@ Donate link: https://ko-fi.com/litonarefin
 Tags: admin bar, hide admin bar, admin bar position, toolbar, customization
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -213,6 +213,13 @@ You can use the **WordPress.org support forum** for the free plugin or contact t
 Please report security bugs found in the source code of the undefined plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/9e5fbf72-c5af-40b1-9dc6-b85c93dfbbbb). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Changelog ==
+= 1.1.7 (10-06-2026) =
+* Fixed: Admin menu (sidebar) submenu flyout mispositioned after customizing admin bar items. Restored WordPress's responsive menu toggle node so submenu margins calculate correctly.
+* Fixed: Admin bar submenu markup now keeps WordPress's original structural classes (left/right placement and group nesting) after editing, so dropdowns position properly.
+* Fixed: PHP "Undefined array key" warnings.
+* Fixed: Hidden iframe style issue.
+* Removed: Recommended plugin support from Features.
+
 = 1.1.6 (06-05-2026) =
 * Fixed: Recommended menu not showing issue fixed.
 

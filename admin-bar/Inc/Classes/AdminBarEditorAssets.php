@@ -247,11 +247,11 @@ class AdminBarEditorAssets extends AdminBarEditorModel
 
     public function adminbar_editor_enqueue_scripts()
     {
-        global $pagenow;
+        $screen = get_current_screen();
 
-        if (('admin.php' === $pagenow) && ('jlt_admin_bar_editor-settings' === $_GET['page'])) {
+        wp_enqueue_style('jlt-admin-bar-sdk');
+        if ( 'toplevel_page_jlt_admin_bar_editor-settings' === $screen->id ) {
             // Enqueue Styles
-            wp_enqueue_style('jlt-admin-bar-sdk');
             wp_enqueue_style('jlt-admin-bar-admin');
 
             // icons
