@@ -1,4 +1,7 @@
 == Changelog ==
+= 1.1.8 (11-06-2026) =
+* Fixed: Editor not loading or saving on some sites, including multisite with multiple domains. The REST URL is now built correctly so it works on every setup.
+
 = 1.1.7 (10-06-2026) =
 * Fixed: Admin menu (sidebar) submenu flyout mispositioned after customizing admin bar items. Restored WordPress's responsive menu toggle node so submenu margins calculate correctly.
 * Fixed: Admin bar submenu markup now keeps WordPress's original structural classes (left/right placement and group nesting) after editing, so dropdowns position properly.

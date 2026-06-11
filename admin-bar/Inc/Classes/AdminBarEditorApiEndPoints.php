@@ -540,10 +540,33 @@ class AdminBarEditorApiEndPoints extends AdminBarEditorModel
     /**
      * Returns the full rest url of a given endpoint.
      *
+     * Uses the `?rest_route=` query form anchored to site_url() (the host that
+     * serves wp-admin) instead of the pretty /wp-json/ form anchored to
+     * home_url(). This keeps the request same-origin with the admin page and
+     * avoids depending on pretty permalinks / .htaccess rewrites, so it works on:
+     *   - installs where home_url() differs from site_url()
+     *   - domain-mapped / multi-domain multisite
+     *   - servers that don't route /wp-json/ (the ?rest_route= fallback)
+     *
+     * @param string $endpoint Endpoint path, e.g. '/get-adminbar-menu-items/'.
+     * @return string
      */
     public static function get_rest_url($endpoint)
     {
         $instance = new self();
-        return \rest_url($instance->api_namespace() . $endpoint);
+        $route    = '/' . ltrim($instance->api_namespace() . $endpoint, '/');
+
+        $url = \add_query_arg('rest_route', $route, \site_url('/'));
+
+        /**
+         * Filter the plugin REST base/endpoint url.
+         *
+         * Allows overriding the generated url (e.g. to force the pretty
+         * /wp-json/ form via rest_url()) on setups that need it.
+         *
+         * @param string $url      Generated rest_route url.
+         * @param string $endpoint Requested endpoint path.
+         */
+        return \apply_filters('jlt_adminbar_editor_rest_url', $url, $endpoint);
     }
 }
