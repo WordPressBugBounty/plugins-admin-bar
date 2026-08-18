@@ -8,7 +8,6 @@ use JewelTheme\AdminBarEditor\Libs\Featured;
 use JewelTheme\AdminBarEditor\Inc\Classes\Core;
 use JewelTheme\AdminBarEditor\Inc\Classes\Recommended_Plugins;
 use JewelTheme\AdminBarEditor\Inc\Classes\Notifications\Notifications;
-use JewelTheme\AdminBarEditor\Inc\Classes\Pro_Upgrade;
 use JewelTheme\AdminBarEditor\Inc\Classes\Upgrade_Plugin;
 use JewelTheme\AdminBarEditor\Inc\Classes\Feedback;
 
@@ -133,7 +132,6 @@ if ( ! class_exists( '\JewelTheme\AdminBarEditor\AdminBarEditor' ) ) {
 		public function jlt_admin_bar_editor_plugins_loaded() {
 			new Assets();
 			new Recommended_Plugins();
-			new Pro_Upgrade();
 			new Notifications();
 			new Featured();
 			new Feedback();

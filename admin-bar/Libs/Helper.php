@@ -60,7 +60,7 @@ if ( ! class_exists( 'Helper' ) ) {
 		 * @return string
 		 */
 		public static function api_endpoint() {
-			$api_endpoint_url = 'https://bo.jeweltheme.com';
+			$api_endpoint_url = 'https://pixarlabs.com';
 			$api_endpoint     = apply_filters( 'jlt_admin_bar_editor_endpoint', $api_endpoint_url );
 
 			return trailingslashit( $api_endpoint );
@@ -72,22 +72,10 @@ if ( ! class_exists( 'Helper' ) ) {
 		 * @return string
 		 */
 		public static function crm_endpoint() {
-			$crm_endpoint_url = 'https://bo.jeweltheme.com/wp-json/jlt-api/v1/subscribe'; // Endpoint .
+			$crm_endpoint_url = self::api_endpoint() . 'api/plugin/subscribe';
 			$crm_endpoint     = apply_filters( 'jlt_admin_bar_editor_crm_crm_endpoint', $crm_endpoint_url );
 
 			return trailingslashit( $crm_endpoint );
-		}
-
-		/**
-		 * CRM Endpoint
-		 *
-		 * @return string
-		 */
-		public static function crm_survey_endpoint() {
-			$crm_feedback_endpoint_url = 'https://bo.jeweltheme.com/wp-json/jlt-api/v1/survey'; // Endpoint .
-			$crm_feedback_endpoint     = apply_filters( 'jlt_admin_bar_editor_crm_crm_endpoint', $crm_feedback_endpoint_url );
-
-			return trailingslashit( $crm_feedback_endpoint );
 		}
 
 		/**
@@ -112,39 +100,6 @@ if ( ! class_exists( 'Helper' ) ) {
 			$tz_offset = sprintf( '%s%02d:%02d', $sign, $abs_hour, $abs_mins );
 
 			return $tz_offset;
-		}
-
-		/**
-		 * Get Merged Data
-		 *
-		 * @param [type] $data .
-		 * @param string $start_date .
-		 * @param string $end_data .
-		 *
-		 * @author Jewel Theme <support@jeweltheme.com>
-		 */
-		public static function get_merged_data( $data, $start_date = '', $end_data = '' ) {
-			$_data = shortcode_atts(
-				array(
-					'image_url'        => JLT_ADMIN_BAR_EDITOR_IMAGES . 'promo-image.png',
-					'start_date'       => $start_date,
-					'end_date'         => $end_data,
-					'counter_time'     => '',
-					'is_campaign'      => 'false',
-					'button_text'      => 'Get Premium',
-					'button_url'       => 'https://jeweltheme.com/admin-bar-editor',
-					'btn_color'        => '#CC22FF',
-					'notice'           => '',
-					'notice_timestamp' => '',
-				),
-				$data
-			);
-
-			if ( empty( $_data['image_url'] ) ) {
-				$_data['image_url'] = JLT_ADMIN_BAR_EDITOR_IMAGES . 'promo-image.png';
-			}
-
-			return $_data;
 		}
 
 

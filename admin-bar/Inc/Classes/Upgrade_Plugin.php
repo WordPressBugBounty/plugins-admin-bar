@@ -18,6 +18,7 @@ if ( ! class_exists( 'Upgrade_Plugin' ) ) {
 		 */
 		protected $upgrades = array(
 			'1.1.2.2' => 'Inc/Upgrades/upgrade-1.1.2.2.php', // path should be from root except trailingslash of the beginning.
+			'1.1.9'   => 'Inc/Upgrades/upgrade-1.1.9.php',
 		);
 	}
 }

@@ -32,8 +32,5 @@ class Manager extends Data {
 
 		// Register What we Collect Notice .
 		$this->register( new What_We_Collect() );
-
-		// Register Upgrade_Notice Notice for managing all notices .
-		$this->register( new Upgrade_Notice() );
 	}
 }

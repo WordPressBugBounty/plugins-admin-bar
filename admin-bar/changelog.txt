@@ -1,4 +1,7 @@
 == Changelog ==
+= 1.1.9 (18-08-2026) =
+* Changed: Plugin notices now appear only on the Adminbar Editor settings page instead of every admin screen.
+
 = 1.1.8 (11-06-2026) =
 * Fixed: Editor not loading or saving on some sites, including multisite with multiple domains. The REST URL is now built correctly so it works on every setup.
 

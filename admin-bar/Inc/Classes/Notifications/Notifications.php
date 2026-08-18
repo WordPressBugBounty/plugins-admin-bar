@@ -27,6 +27,13 @@ class Notifications {
 	public $slug;
 
 	/**
+	 * Settings page slug.
+	 *
+	 * @var string
+	 */
+	public $settings_page = 'jlt_admin_bar_editor-settings';
+
+	/**
 	 * Constructor method
 	 */
 	public function __construct() {
@@ -37,7 +44,6 @@ class Notifications {
 		add_action( 'admin_notices', array( $this, 'setup_notifications' ) );
 
 		add_action( 'jlt_admin_bar_editor_display_notice', array( $this, 'display_notice' ), 10, 2 );
-		add_action( 'jlt_admin_bar_editor_display_popup', array( $this, 'display_popup' ), 10, 2 );
 
 		add_action( 'wp_ajax_jlt_admin_bar_editor_notification_action', array( $this, 'notification_action' ) );
 	}
@@ -115,13 +121,33 @@ class Notifications {
 	}
 
 	/**
+	 * Whether notices are allowed on the current screen.
+	 *
+	 * Notices are limited to the plugin's own settings page, to avoid
+	 * cluttering unrelated screens.
+	 *
+	 * @return bool
+	 * @author Jewel Theme <support@jeweltheme.com>
+	 */
+	public function is_allowed_screen() {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+
+		$allowed = ( $screen && false !== strpos( $screen->id, $this->settings_page ) );
+
+		return (bool) apply_filters( 'jlt_admin_bar_editor_notice_allowed_screen', $allowed );
+	}
+
+	/**
 	 * Notification setup
 	 *
 	 * @author Jewel Theme <support@jeweltheme.com>
 	 */
 	public function setup_notifications() {
+		if ( ! $this->is_allowed_screen() ) {
+			return;
+		}
+
 		$this->setup_notifications_by_type( 'notice' );
-		$this->setup_notifications_by_type( 'popup' );
 	}
 
 
@@ -143,91 +169,4 @@ class Notifications {
 		$notice->core_script( $trigger_time );
 	}
 
-	/**
-	 * Display Popup
-	 *
-	 * @param [type] $popup .
-	 * @param [type] $trigger_time .
-	 *
-	 * @return void
-	 * @author Jewel Theme <support@jeweltheme.com>
-	 */
-	public function display_popup( $popup, $trigger_time ) {
-		$image_url = $popup->get_content( 'image_url' );
-
-		?>
-
-		<div class="admin-bar-popup" id="admin-bar-popup" data-plugin="<?php echo esc_attr( $this->slug ); ?>" tabindex="1">
-
-			<div class="admin-bar-popup-overlay"></div>
-
-			<div class="admin-bar-popup-modal" style="background-image: url('<?php echo esc_url( $image_url ); ?>'); --admin-bar-popup-color: <?php echo esc_attr( $popup->get_content( 'btn_color' ) ); ?>;">
-
-				<!-- close  -->
-				<div class="admin-bar-popup-modal-close popup-dismiss">×</div>
-
-				<!-- content section  -->
-				<div class="admin-bar-popup-modal-footer">
-
-					<!-- countdown  -->
-					<div class="admin-bar-popup-countdown" style="display: none;">
-						<span class="admin-bar-popup-countdown-text"><?php echo esc_html__( 'Deal Ends In', 'admin-bar' ); ?></span>
-						<div class="admin-bar-popup-countdown-time">
-							<div>
-								<span data-counter="days">00</span>
-								<span><?php echo esc_html__( 'Days', 'admin-bar' ); ?></span>
-							</div>
-							<span>:</span>
-							<div>
-								<span data-counter="hours">00</span>
-								<span><?php echo esc_html__( 'Hours', 'admin-bar' ); ?></span>
-							</div>
-							<span>:</span>
-							<div>
-								<span data-counter="minutes">00</span>
-								<span><?php echo esc_html__( 'Minutes', 'admin-bar' ); ?></span>
-							</div>
-							<span>:</span>
-							<div>
-								<span data-counter="seconds">00</span>
-								<span><?php echo esc_html__( 'Seconds', 'admin-bar' ); ?></span>
-							</div>
-						</div>
-					</div>
-
-					<!-- button  -->
-					<a class="admin-bar-popup-button" target="_blank" href="<?php echo esc_url( $popup->get_content( 'button_url' ) ); ?>"><?php echo esc_html( $popup->get_content( 'button_text' ) ); ?></a>
-				</div>
-			</div>
-		</div>
-
-		<script>
-			function jlt_admin_bar_editor_popup_action(evt, $this, $action_type) {
-
-				evt.preventDefault();
-
-				$this.closest('.admin-bar-popup').fadeOut(200);
-
-				jQuery.post('<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>', {
-					action: 'jlt_admin_bar_editor_notification_action',
-					_wpnonce: '<?php echo esc_js( wp_create_nonce( 'jlt_admin_bar_editor_notification_nonce' ) ); ?>',
-					action_type: $action_type,
-					notification_type: 'popup',
-					trigger_time: '<?php echo esc_attr( $trigger_time ); ?>'
-				});
-			}
-
-			// Notice Dismiss
-			jQuery('body').on('click', '.admin-bar-popup .popup-dismiss', function(evt) {
-				jlt_admin_bar_editor_popup_action(evt, jQuery(this), 'dismiss');
-			});
-
-			// Notice Disable
-			jQuery('body').on('click', '.admin-bar-popup .popup-disable', function(evt) {
-				jlt_admin_bar_editor_popup_action(evt, jQuery(this), 'disable');
-			});
-		</script>
-
-		<?php
-	}
 }
