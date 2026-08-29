@@ -33,7 +33,7 @@ if (!class_exists('Core')) {
             $this->admin_bar_options  = (new AdminBarEditorOptions())->get();
 
             new AdminBarEditorApiEndPoints();
-            new AdminBarEditorAssets();
+            AdminBarEditorAssets::get_instance();
             $this->initialization();
 
             add_action('init', array($this, 'jltwp_adminbar_frontend'));

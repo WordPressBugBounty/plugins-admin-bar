@@ -44,7 +44,13 @@ if ( ! class_exists( 'Recommended' ) ) {
 		 * Build the plugin-install URL filtered by author.
 		 */
 		public function get_recommended_url() {
-			return admin_url( 'plugin-install.php?tab=search&type=author&s=' . rawurlencode( $this->author ) );
+			$url = 'plugin-install.php?tab=search&type=author&s=' . rawurlencode( $this->author );
+
+			if( is_multisite() ) {
+				return network_admin_url( $url );
+			}
+
+			return admin_url( $url );
 		}
 
 		/**

@@ -19,6 +19,19 @@ class AdminBarEditorAssets extends AdminBarEditorModel
     public $options;
     public $adminify_ui;
 
+    private static $instance = null;
+
+    /**
+     * Get singleton instance
+     */
+    public static function get_instance() {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+
     public function __construct()
     {
         add_action('admin_enqueue_scripts', [$this, 'adminbar_editor_enqueue_scripts'], 100);
@@ -215,6 +228,8 @@ class AdminBarEditorAssets extends AdminBarEditorModel
 
     public function adminbar_editor_enqueue_scripts_frontend()
     {
+        if( empty( is_admin_bar_showing() ) ) return;
+
         ?>
             <script>
                 if( null != document.querySelector("#wp-admin-bar-my-sites > .ab-item > .jlt-admin-bar-menu")){
