@@ -1,4 +1,8 @@
 == Changelog ==
+= 1.1.11 (14-10-2026) =
+* Fixed: Browser console showing source map (.map) 404 errors on the settings page.
+* Improved: Smaller production build of editor scripts for faster loading.
+
 = 1.1.10 (29-08-2026) =
 * Fixed: Frontend unnecessary script loading issue fixed.
 * Fixed: Multisite recommended url issue fixed.

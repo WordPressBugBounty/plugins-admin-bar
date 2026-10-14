@@ -165,13 +165,6 @@ class AdminBarEditorAssets extends AdminBarEditorModel
      * @method wp_enqueue_scripts()
      */
     public function jlt_admin_bar_editor_enqueue_scripts() {
-
-        // CSS Files .
-        // wp_enqueue_style( 'admin-bar-frontend', JLT_ADMIN_BAR_EDITOR_ASSETS . 'css/admin-bar-frontend.css', JLT_ADMIN_BAR_EDITOR_VER, 'all' );
-
-        // JS Files .
-        // wp_enqueue_script( 'admin-bar-frontend', JLT_ADMIN_BAR_EDITOR_ASSETS . 'js/admin-bar-frontend.js', array( 'jquery' ), JLT_ADMIN_BAR_EDITOR_VER, true );
-
         if(!is_admin()){
             $frontend_admin_bar_css = '#wpadminbar .ab-top-menu .ab-sub-wrapper .ab-submenu .ab-item {
                 height: auto !important;
@@ -273,9 +266,6 @@ class AdminBarEditorAssets extends AdminBarEditorModel
             wp_enqueue_style('jlt-admin-bar-simple-line-icons');
             wp_enqueue_style('jlt-admin-bar-icomoon');
             wp_enqueue_style('jlt-admin-bar-themify-icons');
-
-            // Enqueue Scripts
-            wp_enqueue_script('jlt-admin-bar-admin');
         }
 
         // De-register and Dequeue Scripts/Styles
@@ -299,7 +289,7 @@ class AdminBarEditorAssets extends AdminBarEditorModel
             'nonce'                    => wp_create_nonce( 'wp_rest' ),
             'adminify_ui' => class_exists('\PXLBSAdminify\Inc\Admin\AdminSettings') ?  \PXLBSAdminify\Inc\Admin\AdminSettings::get_instance()->get()['admin_ui'] : false,
         );
-        wp_localize_script('jlt-admin-bar-admin', 'JltAdminBarEditor', $localize_adminbar_data);
+        wp_localize_script('jlt-admin-bar-editor', 'JltAdminBarEditor', $localize_adminbar_data);
     }
 
 }

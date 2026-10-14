@@ -54,12 +54,11 @@ if ( ! class_exists( 'Assets' ) ) {
 
 
 				// JS Files .
-				wp_enqueue_script( 'jlt-admin-bar-admin', JLT_ADMIN_BAR_EDITOR_ASSETS . 'js/admin-bar-admin.js', array( 'jquery' ), JLT_ADMIN_BAR_EDITOR_VER, true );
 				wp_enqueue_script( 'jlt-admin-bar-editor', JLT_ADMIN_BAR_EDITOR_ASSETS . 'js/admin-bar-editor.js', array(), JLT_ADMIN_BAR_EDITOR_VER, true );
 
 
 				wp_localize_script(
-					'jlt-admin-bar-admin',
+					'jlt-admin-bar-editor',
 					'JLT_ADMIN_BAR_EDITORCORE',
 					array(
 						'admin_ajax'        => admin_url( 'admin-ajax.php' ),
