@@ -1,4 +1,7 @@
 == Changelog ==
+= 1.1.12 (15-10-2026) =
+* Fixed: Dynamic admin bar items (WooCommerce visibility badge, Query Monitor stats, etc.) showing stale values saved at settings time.
+
 = 1.1.11 (14-10-2026) =
 * Fixed: Browser console showing source map (.map) 404 errors on the settings page.
 * Improved: Smaller production build of editor scripts for faster loading.

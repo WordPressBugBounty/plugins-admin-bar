@@ -534,6 +534,17 @@ if (!class_exists('Core')) {
                     $menu['title_encoded_default'] = htmlspecialchars($menu['title_default'], ENT_QUOTES, 'UTF-8');
                 }
 
+                // Stored defaults are snapshots taken when settings were saved. Dynamic nodes
+                // (WooCommerce visibility badge, Query Monitor stats, etc.) change per request,
+                // so read their default title/meta/group from the live node instead of the DB.
+                $is_custom_item = !empty($menu['newly_created']) && $menu['newly_created'] == 1;
+                if (!$is_custom_item && $menu_id !== 'user-info' && isset($this->original_nodes[$menu_id])) {
+                    $live_node             = $this->original_nodes[$menu_id];
+                    $menu['title_default'] = $live_node->title;
+                    $menu['meta']          = $live_node->meta;
+                    $menu['group']         = $live_node->group;
+                }
+
                 $args = array();
 
                 $role_allowed = true;

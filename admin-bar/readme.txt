@@ -4,7 +4,7 @@ Donate link: https://ko-fi.com/litonarefin
 Tags: admin bar, toolbar, hide admin bar, custom admin bar, user roles
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.1.11
+Stable tag: 1.1.12
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -211,6 +211,9 @@ You can use the **WordPress.org support forum** for the free plugin or contact t
 Please report security bugs found in the source code of the undefined plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/9e5fbf72-c5af-40b1-9dc6-b85c93dfbbbb). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Changelog ==
+= 1.1.12 (15-10-2026) =
+* Fixed: Dynamic admin bar items (WooCommerce visibility badge, Query Monitor stats, etc.) showing stale values saved at settings time.
+
 = 1.1.11 (14-10-2026) =
 * Fixed: Browser console showing source map (.map) 404 errors on the settings page.
 * Improved: Smaller production build of editor scripts for faster loading.
